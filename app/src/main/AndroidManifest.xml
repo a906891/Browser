@@ -31,6 +31,15 @@
         <activity android:name="com.abhiraj.indianbrowsermadeinindia.custom.PaintActivity"/>
 
         <activity android:name="com.abhiraj.indianbrowsermadeinindia.DownloaderNew"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Settings"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsDownload"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsChnagelanguage"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsAboutUs"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsNotification"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsBrowsing"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsClearRecord"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsAdBlocker"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsSearch"/>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data

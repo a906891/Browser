@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -58,6 +59,7 @@ import com.abhiraj.indianbrowsermadeinindia.FavAndHisActivity;
 import com.abhiraj.indianbrowsermadeinindia.MainActivity;
 import com.abhiraj.indianbrowsermadeinindia.PopupWindowUrl;
 import com.abhiraj.indianbrowsermadeinindia.R;
+import com.abhiraj.indianbrowsermadeinindia.Settings;
 import com.abhiraj.indianbrowsermadeinindia.constance.fragConst;
 import com.abhiraj.indianbrowsermadeinindia.custom.PaintActivity;
 import com.abhiraj.indianbrowsermadeinindia.event.baseEvent;
@@ -770,13 +772,16 @@ public class mainFrag extends baseFrag  {
                 ImageView showHistories = (ImageView) toolsPopWindow.getView(R.id.show_history_button);
                 ImageView pageScreenshot = (ImageView) toolsPopWindow.getView(R.id.downloadsbtn);
                 ImageView windowScreenshot = (ImageView) toolsPopWindow.getView(R.id.window_screenshot);
-
+//menu buttons
                 ImageView sharebtn = (ImageView)toolsPopWindow.getView(R.id.sharebtn);
                 ImageView reloadmenubtn = (ImageView)toolsPopWindow.getView(R.id.reloadmenubtn);
+                ImageView settingsbtn = (ImageView)toolsPopWindow.getView(R.id.settingsbtn);
+                ImageView menudownbtn = (ImageView)toolsPopWindow.getView(R.id.menudownbtn);
+                ImageView exitbtn = (ImageView)toolsPopWindow.getView(R.id.exitbtn);
 
-//               This is for editing page very good feature
-//                ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
-//                 pageEdit.setOnClickListener(toolsClickedListener);
+//              This is for editing page very good feature
+//              ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
+//              pageEdit.setOnClickListener(toolsClickedListener);
                 sharebtn.setOnClickListener(toolsClickedListener);
                 privateBrowsing.setOnClickListener(toolsClickedListener);
                 addFavorite.setOnClickListener(toolsClickedListener);
@@ -784,6 +789,11 @@ public class mainFrag extends baseFrag  {
                 showHistories.setOnClickListener(toolsClickedListener);
                 pageScreenshot.setOnClickListener(toolsClickedListener);
                 windowScreenshot.setOnClickListener(toolsClickedListener);
+
+                settingsbtn.setOnClickListener(toolsClickedListener);
+                menudownbtn.setOnClickListener(toolsClickedListener);
+                exitbtn.setOnClickListener(toolsClickedListener);
+                reloadmenubtn.setOnClickListener(toolsClickedListener);
 
             }
         }
@@ -905,6 +915,22 @@ public class mainFrag extends baseFrag  {
             else if(view.getId() == R.id.reloadmenubtn)
             {
 
+            }
+            else if(view.getId() == R.id.exitbtn)
+            {
+
+            }
+            else if(view.getId() == R.id.settingsbtn)
+            {
+                toolsPopWindow.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), Settings.class);
+                intent.putExtra("type", "settings");
+                startActivityForResult(intent, MainActivity.REQUEST_OPEN_SETTINGS);
+            }
+            else if(view.getId() == R.id.menudownbtn)
+            {
+                toolsPopWindow.dismiss();
             }
 
 //            else if (view.getId() == R.id.page_edit) {
