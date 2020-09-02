@@ -770,14 +770,21 @@ public class mainFrag extends baseFrag  {
                 ImageView showHistories = (ImageView) toolsPopWindow.getView(R.id.show_history_button);
                 ImageView pageScreenshot = (ImageView) toolsPopWindow.getView(R.id.downloadsbtn);
                 ImageView windowScreenshot = (ImageView) toolsPopWindow.getView(R.id.window_screenshot);
-                ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
+
+                ImageView sharebtn = (ImageView)toolsPopWindow.getView(R.id.sharebtn);
+                ImageView reloadmenubtn = (ImageView)toolsPopWindow.getView(R.id.reloadmenubtn);
+
+//               This is for editing page very good feature
+//                ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
+//                 pageEdit.setOnClickListener(toolsClickedListener);
+                sharebtn.setOnClickListener(toolsClickedListener);
                 privateBrowsing.setOnClickListener(toolsClickedListener);
                 addFavorite.setOnClickListener(toolsClickedListener);
                 showFavorites.setOnClickListener(toolsClickedListener);
                 showHistories.setOnClickListener(toolsClickedListener);
                 pageScreenshot.setOnClickListener(toolsClickedListener);
                 windowScreenshot.setOnClickListener(toolsClickedListener);
-                pageEdit.setOnClickListener(toolsClickedListener);
+
             }
         }
     }
@@ -881,19 +888,38 @@ public class mainFrag extends baseFrag  {
                         .create();
                 saveImageToChoosePath.show();
 
-            } else if (view.getId() == R.id.page_edit) {
-                //编辑网页
-                toolsPopWindow.dismiss();
-                View sView;
-                sView = getActivity().getWindow().getDecorView();
-                final Bitmap sBitmap = Bitmap.createBitmap(sView.getWidth(), sView.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas sCanvas = new Canvas(sBitmap);
-                sView.draw(sCanvas);
-                Intent intent = new Intent();
-                PaintActivity.originalBitmap = sBitmap;
-                intent.setClass(getActivity(), PaintActivity.class);
-                startActivity(intent);
             }
+            else if(view.getId() == R.id.sharebtn)
+            {
+
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String body = "INDIAN UC BROWSER : MADE IN INDIA ";
+                String sub = "URL";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, sub);
+                myIntent.putExtra(Intent.EXTRA_TEXT, body);
+                startActivity(Intent.createChooser(myIntent, "Share Using"));
+
+            }
+
+            else if(view.getId() == R.id.reloadmenubtn)
+            {
+
+            }
+
+//            else if (view.getId() == R.id.page_edit) {
+//                //编辑网页
+//                toolsPopWindow.dismiss();
+//                View sView;
+//                sView = getActivity().getWindow().getDecorView();
+//                final Bitmap sBitmap = Bitmap.createBitmap(sView.getWidth(), sView.getHeight(), Bitmap.Config.ARGB_8888);
+//                Canvas sCanvas = new Canvas(sBitmap);
+//                sView.draw(sCanvas);
+//                Intent intent = new Intent();
+//                PaintActivity.originalBitmap = sBitmap;
+//                intent.setClass(getActivity(), PaintActivity.class);
+//                startActivity(intent);
+//            }
         }
     }
 

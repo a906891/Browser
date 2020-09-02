@@ -57,7 +57,7 @@ public class MainActivity extends FragmentActivity {
     //set request code
     public static final int REQUEST_DEFAULT = -1;
     public static final int REQUEST_OPEN_FAV_OR_HIS = 0;
-    public static final int REQUEST_OPEN_DOWNLOADS = 0;
+    public static final int REQUEST_OPEN_DOWNLOADS = 0; //for openning downloads
     public static final int REQUEST_SAVE_IMAGE_PATH = 0;
 
     public MainActivity() {
