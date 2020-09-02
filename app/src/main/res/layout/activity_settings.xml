@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Settings"
+    android:layout_marginStart="10dp">
+
+
+    <Button
+        android:id="@+id/setDefaultBrowserbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set as Default Browser"
+        android:layout_marginTop="50dp"
+        android:background="@color/transparent"
+        android:textAlignment="textStart"/>
+
+    <Button
+        android:id="@+id/downloadSettingsbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Download Settings"
+        android:background="@color/transparent"
+        android:textAlignment="textStart"/>
+
+    <Button
+        android:id="@+id/searchSetttingsbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Settings"
+        android:background="@color/transparent"
+        android:textAlignment="textStart"/>
+
+    <Button
+        android:id="@+id/adBlockerbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ad Blocker"
+        android:background="@color/transparent"
+        android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/clearRecordsbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear Records"
+        android:background="@color/transparent"
+        android:textAlignment="textStart"/>
+
+    <Button
+        android:id="@+id/browsingSettingsbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Browsing Settings "
+        android:background="@color/transparent"
+        android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/notificationSettingsbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:text="Notification Settings"
+        android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/aboutUsbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:text="About US"
+        android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/changeLanguagebtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:text="Language"
+        android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/resetToDefaultbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset to default"
+        />
+
+</LinearLayout>
