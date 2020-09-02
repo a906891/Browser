@@ -78,4 +78,5 @@ public class fragAdapter extends FragmentStatePagerAdapter {
         super.destroyItem(container, position, object);
 
     }
+
 }

@@ -17,12 +17,23 @@ public class Incognito extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incognito);
 
+        run();
+
+
+    }
+    private void run()
+    {
         new Timer().schedule(new TimerTask(){
             public void run() {
 
                 setResult(RESULT_DEFAULT);
-                finish();
+
             }
         }, 2000);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

@@ -10,6 +10,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -81,6 +82,13 @@ import com.abhiraj.indianbrowsermadeinindia.file.RequestShowImageOnline;
 import com.abhiraj.indianbrowsermadeinindia.other.FavAndHisManager;
 import com.abhiraj.indianbrowsermadeinindia.other.ItemLongClickedPopWindow;
 import com.abhiraj.indianbrowsermadeinindia.other.PopupWindowTools;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnSuccessListener;
+import com.google.android.play.core.tasks.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -196,6 +204,8 @@ public class mainFrag extends baseFrag  {
     LinearLayout linear;
     int themeNumber;
     public static final String SHARED_PREFS = "sharedPrefs";
+    //for update
+    private int REQUEST_CODE = 11;
 
     public mainFrag() {
         this.fragTag = fragConst.new_mainfrag_count + "";
@@ -206,6 +216,26 @@ public class mainFrag extends baseFrag  {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //////////FOR UPDATING THE APP
+        final AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(getActivity());
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo result) {
+
+                if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && result.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.FLEXIBLE, getActivity(), REQUEST_CODE);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        ////////////////////////
+
         if(view==null){
             view=inflater.inflate(R.layout.fragment_main, null);
 
@@ -227,12 +257,12 @@ public class mainFrag extends baseFrag  {
 
     private void init(View view) {
 
-
         LinearLayout ly = view.findViewById(R.id.mainbackground);
         linear = ly;
-/// for changing the bacgrounf for the first time.
+/// for changing the background for the first time.
 
         changebackground();
+
         Log.d("theme", "init: " + themeNumber);
 
         mainLayout = (LinearLayout) view.findViewById(R.id.main_lt);
@@ -483,6 +513,8 @@ public class mainFrag extends baseFrag  {
 
 
     }
+
+
 
     ////Asking for permission
     public static boolean hasPermission(Context context, String... permissions) {
@@ -788,6 +820,8 @@ public class mainFrag extends baseFrag  {
                 privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
                 privateBrowsing.setScaleX(.5f);
                 privateBrowsing.setScaleY(.6f);
+                Toast.makeText(getActivity(), "incognito " + isPrivateBrowsing, Toast.LENGTH_SHORT).show();
+
 
                 ImageView addFavorite = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
                 ImageView showFavorites = (ImageView) toolsPopWindow.getView(R.id.show_favorite_button);
@@ -836,11 +870,11 @@ public class mainFrag extends baseFrag  {
 
 
                     ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
-                    privateBrowsing.setBackgroundResource(R.drawable.incognitoon);
+                    privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
                     privateBrowsing.setScaleX(.5f);
                     privateBrowsing.setScaleY(.6f);
 
-                    Toast.makeText(getActivity(), "Incognito Mode On", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = false;
 
                 } else {
@@ -849,11 +883,11 @@ public class mainFrag extends baseFrag  {
                     toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM| Gravity.RIGHT, 20, tools.getHeight()+40);
                     ////changing the icon of the incognito mode
                     ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
-                    privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
+                    privateBrowsing.setBackgroundResource(R.drawable.incognitoon);
                     privateBrowsing.setScaleX(.5f);
                     privateBrowsing.setScaleY(.6f);
 
-                    Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Incognito Mode On", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = true;
                 }
 
@@ -1288,6 +1322,10 @@ public class mainFrag extends baseFrag  {
     * fresh
     * three status
     * */
+
+
+
+
     public void setStatusOfSearch(int status) {
         if (status == 1) {
             //search status

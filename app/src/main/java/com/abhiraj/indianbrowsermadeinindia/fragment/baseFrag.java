@@ -23,4 +23,6 @@ public class baseFrag extends Fragment implements View.OnTouchListener {
 
         return true;
     }
+
+
 }
