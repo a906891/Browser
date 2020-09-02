@@ -206,6 +206,8 @@ public class mainFrag extends baseFrag  {
     public static final String SHARED_PREFS = "sharedPrefs";
     //for update
     private int REQUEST_CODE = 11;
+    int nightmode = 0;
+    int incognito = 0;
 
     public mainFrag() {
         this.fragTag = fragConst.new_mainfrag_count + "";
@@ -262,6 +264,8 @@ public class mainFrag extends baseFrag  {
 /// for changing the background for the first time.
 
         changebackground();
+
+
 
         Log.d("theme", "init: " + themeNumber);
 
@@ -820,7 +824,6 @@ public class mainFrag extends baseFrag  {
                 privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
                 privateBrowsing.setScaleX(.5f);
                 privateBrowsing.setScaleY(.6f);
-                Toast.makeText(getActivity(), "incognito " + isPrivateBrowsing, Toast.LENGTH_SHORT).show();
 
 
                 ImageView addFavorite = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
@@ -836,6 +839,7 @@ public class mainFrag extends baseFrag  {
                 ImageView exitbtn = (ImageView)toolsPopWindow.getView(R.id.exitbtn);
                 ImageView feedbackbtn = (ImageView)toolsPopWindow.getView(R.id.feedbackbtn);
                 ImageView themesbtn = (ImageView)toolsPopWindow.getView(R.id.themesbtn);
+                ImageView nightmodebtnbtn = (ImageView)toolsPopWindow.getView(R.id.nightmodebtnbtn);
 
 //              This is for editing page very good feature
 //              ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
@@ -847,6 +851,7 @@ public class mainFrag extends baseFrag  {
                 showHistories.setOnClickListener(toolsClickedListener);
                 pageScreenshot.setOnClickListener(toolsClickedListener);
                 themesbtn.setOnClickListener(toolsClickedListener);
+                nightmodebtnbtn.setOnClickListener(toolsClickedListener);
 //                windowScreenshot.setOnClickListener(toolsClickedListener);
 
                 settingsbtn.setOnClickListener(toolsClickedListener);
@@ -854,6 +859,74 @@ public class mainFrag extends baseFrag  {
                 exitbtn.setOnClickListener(toolsClickedListener);
                 reloadmenubtn.setOnClickListener(toolsClickedListener);
                 feedbackbtn.setOnClickListener(toolsClickedListener);
+
+                if(nightmode == 1)
+                {
+                    //change background black
+                    if(incognito == 0)
+                    {
+                        privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
+                        privateBrowsing.setScaleX(.5f);
+                        privateBrowsing.setScaleY(.6f);
+                    }
+                    else
+                    {
+                        privateBrowsing.setBackgroundResource(R.drawable.nightincognitoon);
+                        privateBrowsing.setScaleX(.5f);
+                        privateBrowsing.setScaleY(.6f);
+                    }
+
+
+                    feedbackbtn.setBackgroundResource(R.drawable.nightfeedback);
+                    feedbackbtn.setScaleX(.5f);
+                    feedbackbtn.setScaleY(.6f);
+
+                    reloadmenubtn.setBackgroundResource(R.drawable.nightrefresh);
+                    reloadmenubtn.setScaleX(.5f);
+                    reloadmenubtn.setScaleY(.6f);
+
+                    nightmodebtnbtn.setBackgroundResource(R.drawable.sun);
+                    nightmodebtnbtn.setScaleX(.5f);
+                    nightmodebtnbtn.setScaleY(.6f);
+
+                    addFavorite.setBackgroundResource(R.drawable.nightstar);
+                    addFavorite.setScaleX(.5f);
+                    addFavorite.setScaleY(.6f);
+
+                }
+                else
+                {
+
+                    //change background black
+                    if(incognito == 0)
+                    {
+                        privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
+                        privateBrowsing.setScaleX(.5f);
+                        privateBrowsing.setScaleY(.6f);
+                    }
+                    else
+                    {
+                        privateBrowsing.setBackgroundResource(R.drawable.incognitoon);
+                        privateBrowsing.setScaleX(.5f);
+                        privateBrowsing.setScaleY(.6f);
+                    }
+
+                    feedbackbtn.setBackgroundResource(R.drawable.feedback);
+                    feedbackbtn.setScaleX(.5f);
+                    feedbackbtn.setScaleY(.6f);
+
+                    reloadmenubtn.setBackgroundResource(R.drawable.reload);
+                    reloadmenubtn.setScaleX(.5f);
+                    reloadmenubtn.setScaleY(.6f);
+
+                    nightmodebtnbtn.setBackgroundResource(R.drawable.moon);
+                    nightmodebtnbtn.setScaleX(.5f);
+                    nightmodebtnbtn.setScaleY(.6f);
+
+                    addFavorite.setBackgroundResource(R.drawable.star);
+                    addFavorite.setScaleX(.5f);
+                    addFavorite.setScaleY(.6f);
+                }
             }
         }
     }
@@ -877,6 +950,7 @@ public class mainFrag extends baseFrag  {
                     Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = false;
 
+                    incognito = 0 ;
                 } else {
                     LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
                     View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
@@ -889,6 +963,7 @@ public class mainFrag extends baseFrag  {
 
                     Toast.makeText(getActivity(), "Incognito Mode On", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = true;
+                    incognito = 1;
                 }
 
             } else if (view.getId() == R.id.add_favorite_button) {
@@ -919,6 +994,91 @@ public class mainFrag extends baseFrag  {
                 intent.setClass(getActivity(), Theme.class);
                 intent.putExtra("type", "theme");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_THEMES);
+            }
+            else if(view.getId() == R.id.nightmodebtnbtn)
+            {
+                if(nightmode == 0)
+                {
+
+                    LinearLayout menuback = (LinearLayout) toolsPopWindow.getView(R.id.menuback);
+                    LinearLayout menuback1 = (LinearLayout) toolsPopWindow.getView(R.id.menuback1);
+                    menuback.setBackgroundColor(Color.GRAY);
+                    menuback1.setBackgroundColor(Color.GRAY);
+
+                    toolsPopWindow.dismiss();
+                    nightmode = 1;
+                    final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("nightmode", String.valueOf(nightmode));
+                    editor.apply();
+                    //change background black
+                    linear.setBackgroundResource(R.drawable.nightmodeon);
+                    ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+
+                    privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
+                    privateBrowsing.setScaleX(.5f);
+                    privateBrowsing.setScaleY(.6f);
+
+                    ImageView feedbackbtn = (ImageView) toolsPopWindow.getView(R.id.feedbackbtn);
+                    feedbackbtn.setBackgroundResource(R.drawable.nightfeedback);
+                    feedbackbtn.setScaleX(.5f);
+                    feedbackbtn.setScaleY(.6f);
+
+                    ImageView reloadmenubtn = (ImageView) toolsPopWindow.getView(R.id.reloadmenubtn);
+                    reloadmenubtn.setBackgroundResource(R.drawable.nightrefresh);
+                    reloadmenubtn.setScaleX(.5f);
+                    reloadmenubtn.setScaleY(.6f);
+
+                    ImageView nightmodebtnbtn = (ImageView) toolsPopWindow.getView(R.id.nightmodebtnbtn);
+                    nightmodebtnbtn.setBackgroundResource(R.drawable.sun);
+                    nightmodebtnbtn.setScaleX(.5f);
+                    nightmodebtnbtn.setScaleY(.6f);
+
+                    ImageView add_favorite_button = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
+                    add_favorite_button.setBackgroundResource(R.drawable.nightstar);
+                    add_favorite_button.setScaleX(.5f);
+                    add_favorite_button.setScaleY(.6f);
+
+                }
+                else
+                {
+                    //CHANGE MENU BACKGROUND
+                    LinearLayout menuback = (LinearLayout) toolsPopWindow.getView(R.id.menuback);
+                    menuback.setBackgroundColor(Color.WHITE);
+
+                    linear.setBackgroundResource(R.drawable.back1);
+
+                    toolsPopWindow.dismiss();
+                    nightmode = 0;
+                    final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("nightmode", String.valueOf(nightmode));
+                    editor.apply();
+                    //change background black
+
+
+                    ImageView feedbackbtn = (ImageView) toolsPopWindow.getView(R.id.feedbackbtn);
+                    feedbackbtn.setBackgroundResource(R.drawable.feedback);
+                    feedbackbtn.setScaleX(.5f);
+                    feedbackbtn.setScaleY(.6f);
+
+                    ImageView reloadmenubtn = (ImageView) toolsPopWindow.getView(R.id.reloadmenubtn);
+                    reloadmenubtn.setBackgroundResource(R.drawable.reload);
+                    reloadmenubtn.setScaleX(.5f);
+                    reloadmenubtn.setScaleY(.6f);
+
+                    ImageView nightmodebtnbtn = (ImageView) toolsPopWindow.getView(R.id.nightmodebtnbtn);
+                    nightmodebtnbtn.setBackgroundResource(R.drawable.moon);
+                    nightmodebtnbtn.setScaleX(.5f);
+                    nightmodebtnbtn.setScaleY(.6f);
+
+                    ImageView add_favorite_button = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
+                    add_favorite_button.setBackgroundResource(R.drawable.star);
+                    add_favorite_button.setScaleX(.5f);
+                    add_favorite_button.setScaleY(.6f);
+                }
+
+
             }
 
             else if(view.getId() == R.id.downloadsbtn)
@@ -1036,6 +1196,11 @@ public class mainFrag extends baseFrag  {
 //                startActivity(intent);
 //            }
         }
+    }
+
+    private void changenightmodeicon(int nightmode)
+    {
+
     }
 
     //图片长按弹出窗口操作

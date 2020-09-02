@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/menuback1"
     android:background="@color/white">
 
 <!--    <LinearLayout-->
@@ -97,14 +98,10 @@
 
 <!--    </LinearLayout>-->
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp">
+
 
     <LinearLayout
-        android:id="@+id/tools_window_vertical"
+        android:id="@+id/menuback"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -238,7 +235,6 @@
 
 
                 <ImageView
-                    android:src="@drawable/star"
                     android:id="@+id/add_favorite_button"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -258,7 +254,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:padding="11dp"
-                android:src="@drawable/moon"/>
+                />
 
             <ImageView
                 android:id="@+id/reloadmenubtn"
@@ -267,7 +263,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:padding="11dp"
-                android:src="@drawable/reload"/>
+                />
 
 
             <ImageView
@@ -277,7 +273,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:src="@drawable/feedback"/>
+                />
 
             <ImageView
                 android:id="@+id/private_browsing"
@@ -396,6 +392,6 @@
 
     </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+
 
 </LinearLayout>
