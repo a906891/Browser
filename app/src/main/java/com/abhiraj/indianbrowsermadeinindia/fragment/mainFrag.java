@@ -1039,6 +1039,21 @@ public class mainFrag extends baseFrag  {
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
 
+                    ImageView settingsbtn = (ImageView) toolsPopWindow.getView(R.id.settingsbtn);
+                    settingsbtn.setBackgroundResource(R.drawable.nightsetting);
+                    settingsbtn.setScaleX(.5f);
+                    settingsbtn.setScaleY(.6f);
+
+                    ImageView menudownbtn = (ImageView) toolsPopWindow.getView(R.id.menudownbtn);
+                    menudownbtn.setBackgroundResource(R.drawable.nightdownarrow);
+                    menudownbtn.setScaleX(.5f);
+                    menudownbtn.setScaleY(.6f);
+
+                    ImageView exitbtn = (ImageView) toolsPopWindow.getView(R.id.exitbtn);
+                    exitbtn.setBackgroundResource(R.drawable.nightpowera);
+                    exitbtn.setScaleX(.5f);
+                    exitbtn.setScaleY(.6f);
+
                 }
                 else
                 {
@@ -1076,6 +1091,21 @@ public class mainFrag extends baseFrag  {
                     add_favorite_button.setBackgroundResource(R.drawable.star);
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
+
+                    ImageView settingsbtn = (ImageView) toolsPopWindow.getView(R.id.settingsbtn);
+                    settingsbtn.setBackgroundResource(R.drawable.settings);
+                    settingsbtn.setScaleX(.5f);
+                    settingsbtn.setScaleY(.6f);
+
+                    ImageView menudownbtn = (ImageView) toolsPopWindow.getView(R.id.menudownbtn);
+                    menudownbtn.setBackgroundResource(R.drawable.downarrow);
+                    menudownbtn.setScaleX(.5f);
+                    menudownbtn.setScaleY(.6f);
+
+                    ImageView exitbtn = (ImageView) toolsPopWindow.getView(R.id.exitbtn);
+                    exitbtn.setBackgroundResource(R.drawable.powera);
+                    exitbtn.setScaleX(.5f);
+                    exitbtn.setScaleY(.6f);
                 }
 
 
