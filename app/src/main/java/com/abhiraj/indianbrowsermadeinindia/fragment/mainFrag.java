@@ -56,6 +56,7 @@ import android.widget.Toast;
 
 import com.abhiraj.indianbrowsermadeinindia.DownloaderNew;
 import com.abhiraj.indianbrowsermadeinindia.FavAndHisActivity;
+import com.abhiraj.indianbrowsermadeinindia.Feedback;
 import com.abhiraj.indianbrowsermadeinindia.MainActivity;
 import com.abhiraj.indianbrowsermadeinindia.PopupWindowUrl;
 import com.abhiraj.indianbrowsermadeinindia.R;
@@ -932,6 +933,14 @@ public class mainFrag extends baseFrag  {
             else if(view.getId() == R.id.menudownbtn)
             {
                 toolsPopWindow.dismiss();
+            }
+            else if(view.getId() == R.id.feedbackbtn)
+            {
+                toolsPopWindow.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), Feedback.class);
+                intent.putExtra("type", "feedback");
+                startActivityForResult(intent, MainActivity.REQUEST_OPEN_FEEDBACK);
             }
 
 //            else if (view.getId() == R.id.page_edit) {
