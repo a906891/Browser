@@ -58,6 +58,7 @@ import android.widget.Toast;
 import com.abhiraj.indianbrowsermadeinindia.DownloaderNew;
 import com.abhiraj.indianbrowsermadeinindia.FavAndHisActivity;
 import com.abhiraj.indianbrowsermadeinindia.Feedback;
+import com.abhiraj.indianbrowsermadeinindia.Incognito;
 import com.abhiraj.indianbrowsermadeinindia.MainActivity;
 import com.abhiraj.indianbrowsermadeinindia.PopupWindowUrl;
 import com.abhiraj.indianbrowsermadeinindia.R;
@@ -782,7 +783,12 @@ public class mainFrag extends baseFrag  {
                 LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
                 View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
                 toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM, 20, tools.getHeight()+40);
+                ///assigning icon for the first time
                 ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
+                privateBrowsing.setScaleX(.5f);
+                privateBrowsing.setScaleY(.6f);
+
                 ImageView addFavorite = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
                 ImageView showFavorites = (ImageView) toolsPopWindow.getView(R.id.show_favorite_button);
                 ImageView showHistories = (ImageView) toolsPopWindow.getView(R.id.show_history_button);
@@ -827,17 +833,27 @@ public class mainFrag extends baseFrag  {
                     LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
                     View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
                     toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM| Gravity.RIGHT, 20, tools.getHeight()+40);
-                    Button privateBrowsing = (Button) toolsPopWindow.getView(R.id.private_browsing);
-                    privateBrowsing.setBackgroundColor(Color.parseColor("#EFEFF1"));
-                    Toast.makeText(getActivity(), "Private mode closed", Toast.LENGTH_SHORT).show();
+
+
+                    ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                    privateBrowsing.setBackgroundResource(R.drawable.incognitoon);
+                    privateBrowsing.setScaleX(.5f);
+                    privateBrowsing.setScaleY(.6f);
+
+                    Toast.makeText(getActivity(), "Incognito Mode On", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = false;
+
                 } else {
                     LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
                     View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
                     toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM| Gravity.RIGHT, 20, tools.getHeight()+40);
-                    Button privateBrowsing = (Button) toolsPopWindow.getView(R.id.private_browsing);
-                    privateBrowsing.setBackgroundColor(Color.parseColor("#DDFFFF"));
-                    Toast.makeText(getActivity(), "Private mode on", Toast.LENGTH_SHORT).show();
+                    ////changing the icon of the incognito mode
+                    ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                    privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
+                    privateBrowsing.setScaleX(.5f);
+                    privateBrowsing.setScaleY(.6f);
+
+                    Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = true;
                 }
 

@@ -47,6 +47,8 @@ public class DownloaderNew extends AppCompatActivity implements ItemClickListene
     Realm realm;
     String urlsss = "",filename="";
 
+    private static final int RESULT_DEFAULT = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +112,7 @@ public class DownloaderNew extends AppCompatActivity implements ItemClickListene
             downloadFile(urlsss,filename);
         }
 
+        setResult(RESULT_DEFAULT);
 
     }
 
@@ -365,6 +368,12 @@ public class DownloaderNew extends AppCompatActivity implements ItemClickListene
         unregisterReceiver(onComplete);
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Back and back", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
     public void runTask(DownloadStatusTask downloadStatusTask, String id) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -476,4 +485,6 @@ public class DownloaderNew extends AppCompatActivity implements ItemClickListene
         }
 
     }
+
+    
 }

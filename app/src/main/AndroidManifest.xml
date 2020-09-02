@@ -43,6 +43,11 @@
 
         <activity android:name="com.abhiraj.indianbrowsermadeinindia.Feedback"/>
         <activity android:name="com.abhiraj.indianbrowsermadeinindia.Theme"/>
+
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Incognito"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Incognitooff"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.NighhtModeOff"/>
+        <activity android:name="com.abhiraj.indianbrowsermadeinindia.NightModeOn"/>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data

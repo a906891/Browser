@@ -285,8 +285,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:padding="10dp"
-                android:src="@drawable/incognitooff"/>
+                android:padding="10dp" />
 
 
         </LinearLayout>
