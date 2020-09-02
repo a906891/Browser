@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#EFEFF1</color>
+    <color name="colorPrimaryDark">#EFEFF1</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="penRed">#FF0000</color>
+    <color name="penGreen">#00FF00</color>
+    <color name="penBlue">#0000FF</color>
+    <color name="penMix">#DDFFFF</color>
+
+
+    <color name="color_primary">#FF3F51B5</color>
+    <color name="color_primary_dark">#FF303F9F</color>
+    <color name="color_accent">#FF2196F3</color>
+
+    //// browser colors
+    <color name="maincolor">#E25E14</color>
+
+    <color name="white">#fff</color>
+    <color name="colorwhite_50">#CCffffff</color>
+    <color name="colorwhite_10">#1Affffff</color>
+    <color name="colorwhite_30">#4Dffffff</color>
+    <color name="black">#2F2F2F</color>
+    <color name="graycolor">#D3D3D3</color>
+    <color name="graycolor2">#D3D3D3</color>
+    <color name="gainsboro">#DCDCDC</color>
+    <color name="lightgraycolor">#f2f2f2</color>
+    <color name="darkgray">#93959A</color>
+    <color name="dimgray">#696969</color>
+    <color name="lightblack">#5d5d5d</color>
+    <color name="nightmenucolour">#585858</color>
+
+    <color name="golden">#FFDF00</color>
+
+    <color name="delete_message_bg">#f2f2f2</color>
+    <color name="delete_message_text">#b8b8b8</color>
+
+    <color name="transparent">#00ffffff</color>
+    <color name="fifty_transparent_black">#802F2F2F</color>
+
+    <color name="redcolor">#ff0008</color>
+
+    <color name="app_color">#c52127</color>
+    <color name="colorTheme">#ffb07f</color>
+    <color name="colorTheme1">#BFFFB07F</color>
+    <color name="colorTheme2">#9AFFB07F</color>
+    <color name="blue">#3D5AFE</color>
+    <color name="pink">#ff5ef6</color>
+    <color name="grey">#DADADA</color>
+    <color name="color_text_light">#666D7E</color>
+    <color name="light_white">#f1f1f3</color>
+    <color name="square_green">#1e1f24</color>
+    <color name="color_true">#059500</color>
+    <color name="color_false">#CF1100</color>
+    <color name="transparent_white_60">#99FFFFFF</color>
+
+    <!--black transperent-->
+
+    <color name="napier_green">#FFC36A</color>
+    <color name="india_red">#FFBBC3</color>
+    <color name="kellygreen">#D1FFA8</color>
+    <color name="tufs_blue">#ADD4FF</color>
+    <color name="tiffanyblue">#AAFFFB</color>
+    <color name="Sanddtorm">#FFE595</color>
+    <color name="salmonpink_1">#FFB8C1</color>
+    <color name="transparent_black_90">#E6000000</color>
+    <color name="transparent_black_80">#CC000000</color>
+    <color name="transparent_black_70">#B3000000</color>
+    <color name="transparent_black_60">#99000000</color>
+    <color name="transparent_black_50">#80000000</color>
+    <color name="transparent_black_40">#66000000</color>
+    <color name="transparent_black_30">#4D000000</color>
+    <color name="transparent_black_20">#33000000</color>
+    <color name="transparent_black_10">#1A000000</color>
+    <color name="transparent_black_05">#0D000000</color>
+    <color name="transparent_black_00">#00000000</color>
+    <color name="white_55">#8DFFFFFF</color>
+    <color name="black_55">#8B000000</color>
+
+
+    <color name="EditTextColor">#1e1f24</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#000000</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#B805677F</color>
+    <color name="black_semi_transparent_pressed">#80738f</color>
+
+</resources>

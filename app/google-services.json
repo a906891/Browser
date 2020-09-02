@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "961657540105",
+    "firebase_url": "https://indian-browser-e4c07.firebaseio.com",
+    "project_id": "indian-browser-e4c07",
+    "storage_bucket": "indian-browser-e4c07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961657540105:android:04c4eafa75e0166d7132d8",
+        "android_client_info": {
+          "package_name": "com.abhiraj.indianbrowsermadeinindia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961657540105-4ojo8jbd8ra1cm19rttv1hmkedfjgq81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP_IIPsEbcXM-BTZNCHi9j4Y4vsCV0VOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961657540105-4ojo8jbd8ra1cm19rttv1hmkedfjgq81.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
