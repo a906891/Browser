@@ -778,6 +778,7 @@ public class mainFrag extends baseFrag  {
                 ImageView settingsbtn = (ImageView)toolsPopWindow.getView(R.id.settingsbtn);
                 ImageView menudownbtn = (ImageView)toolsPopWindow.getView(R.id.menudownbtn);
                 ImageView exitbtn = (ImageView)toolsPopWindow.getView(R.id.exitbtn);
+                ImageView feedbackbtn = (ImageView)toolsPopWindow.getView(R.id.feedbackbtn);
 
 //              This is for editing page very good feature
 //              ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
@@ -794,7 +795,7 @@ public class mainFrag extends baseFrag  {
                 menudownbtn.setOnClickListener(toolsClickedListener);
                 exitbtn.setOnClickListener(toolsClickedListener);
                 reloadmenubtn.setOnClickListener(toolsClickedListener);
-
+                feedbackbtn.setOnClickListener(toolsClickedListener);
             }
         }
     }
