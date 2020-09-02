@@ -27,21 +27,20 @@ public class FavAndHisActivity extends Activity {
     public static final int RESULT_FAV_HIS = 0;
     private static final int RESULT_DEFAULT = -1;
 
-    //初始界面书签/历史选择
+    //Initial interface bookmark/history selection
     private String type;
 
     private View favoriteView;
     private View historyView;
 
-
-    //书签历史内容
+    //Bookmark history
     private ListView favoriteContent;
     private ListView historyContent;
 
-    //长按弹窗
+    //Long press the popup
     private ItemLongClickedPopWindow itemLongClickedPopWindow;
 
-    //书签历史管理
+    //Bookmark history management
     private FavAndHisManager favAndHisManager;
 
     //Cursor
@@ -59,7 +58,7 @@ public class FavAndHisActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //初始化
+        //initialization
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         type = bundle.getString("type");
@@ -68,8 +67,7 @@ public class FavAndHisActivity extends Activity {
         favoriteView = favAndHisInflater.inflate(R.layout.view_favorite, null);
         historyView = favAndHisInflater.inflate(R.layout.view_history, null);
 
-
-        //显示初始界面
+        //Show initial interface
         if (type.equals("favorite")) {
             setContentView(favoriteView);
             this.favoriteContent = (ListView) this.findViewById(R.id.favorites_item_content);
@@ -83,7 +81,7 @@ public class FavAndHisActivity extends Activity {
         this.itemLongListener = new ListViewOnItemLongListener();
         this.itemClickedListener = new ListViewOnItemClickedListener();
 
-        //添加监听
+        //Add monitor
         this.favoriteContent.setOnItemLongClickListener(this.itemLongListener);
         this.historyContent.setOnItemLongClickListener(this.itemLongListener);
 
@@ -92,18 +90,18 @@ public class FavAndHisActivity extends Activity {
 
         this.itemLongClickedFlag = false;
 
-        //初始化数据
+        //Initialization data
         this.initDataFavorites();
         this.initDataHistory();
 
-        //添加默认返回值
+        //Add default return value
         setResult(RESULT_DEFAULT);
     }
 
-    //初始化ListView中的数据
+    //Initialize the data in the ListView
     @SuppressWarnings("deprecation")
     private void initDataFavorites() {
-        //获取书签管理
+        //Get bookmark management
         this.favAndHisManager = new FavAndHisManager(this);
         this.favAndHisCursor = this.favAndHisManager.getAllFavorites();
         this.favAndHisAdapter = new SimpleCursorAdapter(getApplicationContext(),
@@ -113,10 +111,11 @@ public class FavAndHisActivity extends Activity {
         this.favoriteContent.setAdapter(this.favAndHisAdapter);
     }
 
-    //初始化ListView中History的数据
+    //
+    //Initialize the history data in ListView
     @SuppressWarnings("deprecation")
     private void initDataHistory() {
-        //获取历史管理
+        //Get history management
         this.favAndHisManager = new FavAndHisManager(this);
         this.favAndHisCursor = this.favAndHisManager.getAllHistory();
         this.favAndHisAdapter = new SimpleCursorAdapter(getApplicationContext(),
@@ -126,7 +125,8 @@ public class FavAndHisActivity extends Activity {
         this.historyContent.setAdapter(this.favAndHisAdapter);
     }
 
-    //长按单项事件
+    //
+    //Long press single event
     private class ListViewOnItemLongListener implements AdapterView.OnItemLongClickListener {
 
         @Override
@@ -159,7 +159,7 @@ public class FavAndHisActivity extends Activity {
         }
     }
 
-    //ListView单击事件
+    //ListView click event
     private class ListViewOnItemClickedListener implements AdapterView.OnItemClickListener {
 
         @Override
@@ -183,7 +183,7 @@ public class FavAndHisActivity extends Activity {
     }
 
 
-    //popupwindow按钮事件
+    //popupwindow button event
     private class ItemClickedListener implements View.OnClickListener {
 
         private String item_id;
@@ -198,11 +198,12 @@ public class FavAndHisActivity extends Activity {
 
         @Override
         public void onClick(View view) {
-            //取消弹窗
+            //Cancel popup
             itemLongClickedPopWindow.dismiss();
             itemLongClickedFlag = false;
             if (view.getId() == R.id.item_longclicked_modifyFavorites) {
-                //弹出修改窗口
+
+                //Pop-up modification window
                 LayoutInflater modifyFavoritesInflater = LayoutInflater.from(FavAndHisActivity.this);
                 View modifyFavoritesView = modifyFavoritesInflater.inflate(R.layout.dialog_modify, null);
                 final TextView item_name_input = (TextView) modifyFavoritesView.findViewById(R.id.dialog_name_input);
@@ -238,7 +239,8 @@ public class FavAndHisActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int width) {
                                 if (favAndHisManager.deleteFavorite(item_id)) {
-                                    //删除成功
+
+                                    //successfully deleted
                                     Toast.makeText(FavAndHisActivity.this, "Bookmark deleted", Toast.LENGTH_SHORT);
                                     initDataFavorites();
                                     favoriteContent.invalidate();

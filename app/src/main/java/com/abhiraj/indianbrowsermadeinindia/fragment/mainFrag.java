@@ -61,6 +61,7 @@ import com.abhiraj.indianbrowsermadeinindia.MainActivity;
 import com.abhiraj.indianbrowsermadeinindia.PopupWindowUrl;
 import com.abhiraj.indianbrowsermadeinindia.R;
 import com.abhiraj.indianbrowsermadeinindia.Settings;
+import com.abhiraj.indianbrowsermadeinindia.Theme;
 import com.abhiraj.indianbrowsermadeinindia.constance.fragConst;
 import com.abhiraj.indianbrowsermadeinindia.custom.PaintActivity;
 import com.abhiraj.indianbrowsermadeinindia.event.baseEvent;
@@ -772,7 +773,7 @@ public class mainFrag extends baseFrag  {
                 ImageView showFavorites = (ImageView) toolsPopWindow.getView(R.id.show_favorite_button);
                 ImageView showHistories = (ImageView) toolsPopWindow.getView(R.id.show_history_button);
                 ImageView pageScreenshot = (ImageView) toolsPopWindow.getView(R.id.downloadsbtn);
-                ImageView windowScreenshot = (ImageView) toolsPopWindow.getView(R.id.window_screenshot);
+//                ImageView windowScreenshot = (ImageView) toolsPopWindow.getView(R.id.window_screenshot);  to take thhe screen shot of webpage
 //menu buttons
                 ImageView sharebtn = (ImageView)toolsPopWindow.getView(R.id.sharebtn);
                 ImageView reloadmenubtn = (ImageView)toolsPopWindow.getView(R.id.reloadmenubtn);
@@ -780,6 +781,7 @@ public class mainFrag extends baseFrag  {
                 ImageView menudownbtn = (ImageView)toolsPopWindow.getView(R.id.menudownbtn);
                 ImageView exitbtn = (ImageView)toolsPopWindow.getView(R.id.exitbtn);
                 ImageView feedbackbtn = (ImageView)toolsPopWindow.getView(R.id.feedbackbtn);
+                ImageView themesbtn = (ImageView)toolsPopWindow.getView(R.id.themesbtn);
 
 //              This is for editing page very good feature
 //              ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
@@ -790,7 +792,8 @@ public class mainFrag extends baseFrag  {
                 showFavorites.setOnClickListener(toolsClickedListener);
                 showHistories.setOnClickListener(toolsClickedListener);
                 pageScreenshot.setOnClickListener(toolsClickedListener);
-                windowScreenshot.setOnClickListener(toolsClickedListener);
+                themesbtn.setOnClickListener(toolsClickedListener);
+//                windowScreenshot.setOnClickListener(toolsClickedListener);
 
                 settingsbtn.setOnClickListener(toolsClickedListener);
                 menudownbtn.setOnClickListener(toolsClickedListener);
@@ -843,7 +846,17 @@ public class mainFrag extends baseFrag  {
                 intent.setClass(getActivity(), FavAndHisActivity.class);
                 intent.putExtra("type", "history");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_FAV_OR_HIS);
-            }else if(view.getId() == R.id.downloadsbtn)
+            }else if(view.getId() == R.id.themesbtn)
+            {
+
+                toolsPopWindow.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), Theme.class);
+                intent.putExtra("type", "theme");
+                startActivityForResult(intent, MainActivity.REQUEST_OPEN_THEMES);
+            }
+
+            else if(view.getId() == R.id.downloadsbtn)
             {
                 toolsPopWindow.dismiss();
                 Intent intent = new Intent();
@@ -851,56 +864,56 @@ public class mainFrag extends baseFrag  {
                 intent.putExtra("type", "download");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_DOWNLOADS);
             }
-            //download open
-            else if (view.getId() == R.id.window_screenshot) {
-                //网页截图或全屏截图
-                toolsPopWindow.dismiss();
-                verifyStoragePermissions(getActivity());
-                View sView;
-                String tempImgName;
-                if (view.getId() == R.id.window_screenshot) {
-                    sView = Objects.requireNonNull(getActivity()).getWindow().getDecorView();
-                    tempImgName = "window_capture" + windowScreenShotCount + ".jpg";
-                    windowScreenShotCount++;
-                }
-                else {
-                    sView = webHolder;
-                    tempImgName = "webview_capture" + pageScreenShotCount + ".jpg";
-                    pageScreenShotCount++;
-                }
-                final Bitmap sBitmap = Bitmap.createBitmap(sView.getWidth(), sView.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas sCanvas = new Canvas(sBitmap);
-                sView.draw(sCanvas);
-                View dialogSaveImg = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_saveimg, null);
-                choosePath = (TextView) dialogSaveImg.findViewById(R.id.dialog_savePath_enter);
-                imgSaveName = (TextView) dialogSaveImg.findViewById(R.id.dialog_fileName_input);
-                final String imgName = tempImgName;
-                imgSaveName.setText(imgName);
-                choosePath.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (view.getId() == R.id.dialog_savePath_enter) {
-                            Intent imgSavePath = new Intent(getActivity(), FileActivity.class);
-                            imgSavePath.putExtra("savePath", choosePath.getText().toString());
-                            startActivityForResult(imgSavePath, MainActivity.REQUEST_SAVE_IMAGE_PATH);
-                        }
-                    }
-                });
-                saveImageToChoosePath = new AlertDialog.Builder(getActivity())
-                        .setTitle("Choose path")
-                        .setView(dialogSaveImg)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                new ImageCaptureManager(getActivity(), imgName, choosePath.getText().toString(), sBitmap);
-                                Toast.makeText(getActivity(), "Screenshot saved", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .create();
-                saveImageToChoosePath.show();
-
-            }
+            //To take screen shot of the web page
+//            else if (view.getId() == R.id.window_screenshot) {
+//                //网页截图或全屏截图
+//                toolsPopWindow.dismiss();
+//                verifyStoragePermissions(getActivity());
+//                View sView;
+//                String tempImgName;
+//                if (view.getId() == R.id.window_screenshot) {
+//                    sView = Objects.requireNonNull(getActivity()).getWindow().getDecorView();
+//                    tempImgName = "window_capture" + windowScreenShotCount + ".jpg";
+//                    windowScreenShotCount++;
+//                }
+//                else {
+//                    sView = webHolder;
+//                    tempImgName = "webview_capture" + pageScreenShotCount + ".jpg";
+//                    pageScreenShotCount++;
+//                }
+//                final Bitmap sBitmap = Bitmap.createBitmap(sView.getWidth(), sView.getHeight(), Bitmap.Config.ARGB_8888);
+//                Canvas sCanvas = new Canvas(sBitmap);
+//                sView.draw(sCanvas);
+//                View dialogSaveImg = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_saveimg, null);
+//                choosePath = (TextView) dialogSaveImg.findViewById(R.id.dialog_savePath_enter);
+//                imgSaveName = (TextView) dialogSaveImg.findViewById(R.id.dialog_fileName_input);
+//                final String imgName = tempImgName;
+//                imgSaveName.setText(imgName);
+//                choosePath.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (view.getId() == R.id.dialog_savePath_enter) {
+//                            Intent imgSavePath = new Intent(getActivity(), FileActivity.class);
+//                            imgSavePath.putExtra("savePath", choosePath.getText().toString());
+//                            startActivityForResult(imgSavePath, MainActivity.REQUEST_SAVE_IMAGE_PATH);
+//                        }
+//                    }
+//                });
+//                saveImageToChoosePath = new AlertDialog.Builder(getActivity())
+//                        .setTitle("Choose path")
+//                        .setView(dialogSaveImg)
+//                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                new ImageCaptureManager(getActivity(), imgName, choosePath.getText().toString(), sBitmap);
+//                                Toast.makeText(getActivity(), "Screenshot saved", Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .setNegativeButton("Cancel", null)
+//                        .create();
+//                saveImageToChoosePath.show();
+//
+//            }
             else if(view.getId() == R.id.sharebtn)
             {
 

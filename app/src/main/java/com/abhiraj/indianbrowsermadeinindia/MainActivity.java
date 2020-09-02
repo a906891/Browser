@@ -58,8 +58,10 @@ public class MainActivity extends FragmentActivity {
     public static final int REQUEST_DEFAULT = -1;
     public static final int REQUEST_OPEN_FAV_OR_HIS = 0;
     public static final int REQUEST_OPEN_DOWNLOADS = 0; //for openning downloads
-    public static final int REQUEST_OPEN_SETTINGS = 0; //for openning downloads
-    public static final int REQUEST_OPEN_FEEDBACK = 0; //for openning downloads
+    public static final int REQUEST_OPEN_SETTINGS = 0; //for openning settings
+    public static final int REQUEST_OPEN_FEEDBACK = 0; //for openning feedback
+    public static final int REQUEST_OPEN_THEMES = 0; //for openning themes
+
 
 
     public static final int REQUEST_SAVE_IMAGE_PATH = 0;
