@@ -10,6 +10,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -88,6 +89,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 import de.greenrobot.event.EventBus;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Administrator on 2016/11/28.
@@ -188,6 +191,10 @@ public class mainFrag extends baseFrag  {
 
     LinearLayout layout;
     WebView webView;
+    //for back groundd change
+    LinearLayout linear;
+    int themeNumber;
+    public static final String SHARED_PREFS = "sharedPrefs";
 
     public mainFrag() {
         this.fragTag = fragConst.new_mainfrag_count + "";
@@ -219,6 +226,13 @@ public class mainFrag extends baseFrag  {
 
     private void init(View view) {
 
+
+        LinearLayout ly = view.findViewById(R.id.mainbackground);
+        linear = ly;
+/// for changing the bacgrounf for the first time.
+
+        changebackground();
+        Log.d("theme", "init: " + themeNumber);
 
         mainLayout = (LinearLayout) view.findViewById(R.id.main_lt);
         mainLayout.setOnTouchListener(this);
@@ -833,19 +847,20 @@ public class mainFrag extends baseFrag  {
                 favAndHisManager.getAllFavorites();
                 Toast.makeText(getActivity(), "Page saved", Toast.LENGTH_SHORT).show();
             } else if (view.getId() ==R.id.show_favorite_button) {
-                //查看编辑书签
+                //View and edit bookmarks
                 toolsPopWindow.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), FavAndHisActivity.class);
                 intent.putExtra("type", "favorite");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_FAV_OR_HIS);
             } else if (view.getId() == R.id.show_history_button) {
-                //查看编辑历史
+                //View edit history
                 toolsPopWindow.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), FavAndHisActivity.class);
                 intent.putExtra("type", "history");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_FAV_OR_HIS);
+
             }else if(view.getId() == R.id.themesbtn)
             {
 
@@ -929,7 +944,8 @@ public class mainFrag extends baseFrag  {
 
             else if(view.getId() == R.id.reloadmenubtn)
             {
-
+                url = webHolder.getUrl();
+                webHolder.loadUrl(url);
             }
             else if(view.getId() == R.id.exitbtn)
             {
@@ -1293,9 +1309,12 @@ public class mainFrag extends baseFrag  {
         }
     }
 
-    //接收书签/历史返回处理
+    //Receive bookmark/historical return processing
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//for changing the background
+        changebackground();
+
         switch (resultCode) {
             case MainActivity.REQUEST_DEFAULT:
                 break;
@@ -1310,6 +1329,35 @@ public class mainFrag extends baseFrag  {
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /////////////// Change Background for the  theme
+    private void changebackground() {
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        themeNumber = Integer.parseInt(sharedPreferences.getString("number", "0"));
+        Log.d("theme", "init: " + themeNumber);
+
+        switch (themeNumber) {
+            case 1:
+                linear.setBackgroundResource(R.drawable.back1);
+                break;
+            case 2:
+                linear.setBackgroundResource(R.drawable.back2);
+                break;
+            case 3:
+                linear.setBackgroundResource(R.drawable.back3);
+                break;
+            case 4:
+                linear.setBackgroundResource(R.drawable.back4);
+                break;
+            case 5:
+                linear.setBackgroundResource(R.drawable.back5);
+                break;
+            case 6:
+                linear.setBackgroundResource(R.drawable.back6);
+                break;
+        }
     }
 
     //获取存储权限

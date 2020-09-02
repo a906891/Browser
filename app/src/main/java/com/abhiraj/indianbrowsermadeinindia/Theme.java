@@ -36,6 +36,8 @@ public class Theme extends Activity implements View.OnClickListener {
         thm5.setOnClickListener(this);
         Button thm6 = findViewById(R.id.thm6);
         thm6.setOnClickListener(this);
+
+        setResult(RESULT_DEFAULT);
     }
 
 
@@ -69,8 +71,10 @@ public class Theme extends Activity implements View.OnClickListener {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("number", String.valueOf(number));
         editor.apply();
+
         Toast.makeText(this, "Number is saved " + number, Toast.LENGTH_SHORT).show();
-//        startActivity(new Intent(Theme.this,OriginalMainActivity.class));
+        finish();   //ultra high level code
+//        startActivity(new Intent  (Theme.this,OriginalMainActivity.class));
     }
 
 
