@@ -89,6 +89,7 @@ public class FavAndHisActivity extends Activity {
             this.historyContent = (ListView) this.findViewById(R.id.histories_item_content);
 
             back = findViewById(R.id.historyback);
+
         }
 
         this.itemLongListener = new ListViewOnItemLongListener();
@@ -112,7 +113,7 @@ public class FavAndHisActivity extends Activity {
 
         if(clearhistory == 1)
         {
-            Toast.makeText(this, "History clear after exit " + clearhistory, Toast.LENGTH_SHORT).show();
+
             favAndHisManager.deleteAllHistories();  //delete history
             initDataHistory();  //showing empty history
             historyContent.invalidate();
@@ -122,7 +123,7 @@ public class FavAndHisActivity extends Activity {
         }
         else
         {
-            Toast.makeText(this, "Not  deleted " + clearhistory, Toast.LENGTH_SHORT).show();
+
         }
 
         //Add default return value
@@ -158,6 +159,7 @@ public class FavAndHisActivity extends Activity {
                 new String[]{"_id", "name", "url", "date"},
                 new int[]{R.id.item_id, R.id.item_name, R.id.item_url, R.id.item_date});
         this.historyContent.setAdapter(this.favAndHisAdapter);
+
     }
 
     //

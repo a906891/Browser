@@ -215,6 +215,7 @@ public class mainFrag extends baseFrag {
     int nightmode = 0;
     int incognito = 0;
     int donotshowagain = 0;
+    int addbookmark = 0;
     //for accessing menu from this
     BottomSheetDialog bottomSheetDialogForIconChange;
     CardView cardView;
@@ -929,7 +930,7 @@ public class mainFrag extends baseFrag {
                     bottomSheetDialogForIconChange.findViewById(R.id.settingsbtn).setScaleY(.5f);
 
                     bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setBackgroundResource(R.drawable.nightpowera);
-                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setScaleX(.25f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setScaleX(.23f);
                     bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setScaleY(.5f);
 
                     cardView.setCardBackgroundColor(Color.DKGRAY);
@@ -1004,6 +1005,21 @@ public class mainFrag extends baseFrag {
                 }
 
             } else if (view.getId() == R.id.addbookmarkbtn) {
+
+                if (addbookmark == 0) {
+                    ImageView add_favorite_button = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn);
+                    add_favorite_button.setBackgroundResource(R.drawable.addbookmark);
+                    add_favorite_button.setScaleX(.5f);
+                    add_favorite_button.setScaleY(.6f);
+                    addbookmark = 1;
+                } else {
+                    ImageView add_favorite_button = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn);
+                    add_favorite_button.setBackgroundResource(R.drawable.stara);
+                    add_favorite_button.setScaleX(.5f);
+                    add_favorite_button.setScaleY(.6f);
+                    addbookmark = 0;
+                }
+
                 //添加书签
                 favAndHisManager.addFavorite(title, url);
                 favAndHisManager.getAllFavorites();
