@@ -986,6 +986,12 @@ public class mainFrag extends baseFrag  {
                     changebackground();
 
                     incognito = 0 ;
+
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), Incognito.class);
+                    intent.putExtra("type", "incognito");
+                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOOFF);
+
                 } else {
                     LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
                     View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
