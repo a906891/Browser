@@ -344,6 +344,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             bottomSheetDialog.show();
 
             bottomSheetDialog.findViewById(R.id.exitconfirmbtn).setOnClickListener(this);
+            bottomSheetDialog.findViewById(R.id.cancelconfirmbtn).setOnClickListener(this);
 
             bottomSheetDialog.findViewById(R.id.clearHistory).setOnClickListener(this);
             ClearHistory = bottomSheetDialog.findViewById(R.id.clearHistory);
@@ -413,6 +414,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     editor1.apply();
                     Toast.makeText(this, "show again", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.cancelconfirmbtn:
+                exit.dismiss();
                 break;
 
         }

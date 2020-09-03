@@ -21,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.test.espresso.core.deps.guava.eventbus.Subscribe;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -104,7 +106,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by Administrator on 2016/11/28.
  */
-public class mainFrag extends baseFrag  {
+public class mainFrag extends baseFrag {
 
     private View view;//缓存Fragment view
 
@@ -202,13 +204,16 @@ public class mainFrag extends baseFrag  {
     WebView webView;
     //for back groundd change
     LinearLayout linear;
-    int themeNumber;
+    int themeNumber = 6;
     public static final String SHARED_PREFS = "sharedPrefs";
     //for update
     private int REQUEST_CODE = 11;
     int nightmode = 0;
     int incognito = 0;
     int donotshowagain = 0;
+    //for accessing menu from this
+    BottomSheetDialog bottomSheetDialogForIconChange;
+    CardView cardView;
 
     public mainFrag() {
         this.fragTag = fragConst.new_mainfrag_count + "";
@@ -239,9 +244,9 @@ public class mainFrag extends baseFrag  {
         });
         ////////////////////////
 
-        if(view==null){
-            view=inflater.inflate(R.layout.fragment_main, null);
-            webView = (WebView)view.findViewById(R.id.web_holder);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_main, null);
+            webView = (WebView) view.findViewById(R.id.web_holder);
 
             init(view);
         }
@@ -462,7 +467,7 @@ public class mainFrag extends baseFrag  {
         });
 
         youtubebtn = view.findViewById(R.id.youtube_btn);
-        youtubebtn  .setOnClickListener(new View.OnClickListener() {
+        youtubebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("google", "onClick: No");
@@ -497,16 +502,15 @@ public class mainFrag extends baseFrag  {
             @Override
             public void onDownloadStart(final String url, final String userAgent, String contentDispotion, String mimetype, long contentlength) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ActivityCompat.checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DownloadAlerter(url, userAgent, contentDispotion, mimetype);    // new download dialog  with editText\
                         // Dialog for download DownloadDialog(url, userAgent, contentDispotion, mimetype);
                     }
 //                    else {
-                        ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 //                    }
 
-                }
-                else {
+                } else {
                     DownloadAlerter(url, userAgent, contentDispotion, mimetype);       // new download dialog with editText
                     //Dialog for dowwnload DownloadDialog(url, userAgent, contentDispotion, mimetype);
                 }
@@ -515,7 +519,6 @@ public class mainFrag extends baseFrag  {
 
 
     }
-
 
 
     ////Asking for permission
@@ -531,8 +534,7 @@ public class mainFrag extends baseFrag  {
         return true;
     }
 
-    public void ChangeWebViewSize()
-    {
+    public void ChangeWebViewSize() {
 
 
         webHolder.setVisibility(View.VISIBLE);
@@ -650,7 +652,7 @@ public class mainFrag extends baseFrag  {
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
             if (positionlist.size() >= 2) {
-                if (fragConst.fraglist.size()>1 &&  Math.abs(positionlist.get(positionlist.size() - 1)[1]) > rootLayout.getWidth() / 2) {
+                if (fragConst.fraglist.size() > 1 && Math.abs(positionlist.get(positionlist.size() - 1)[1]) > rootLayout.getWidth() / 2) {
                     //  Logger.v("-      删除  fragment    -");
                     delAnime();
                     EventBus.getDefault().post(new showDelImg(false));   //  发送消息
@@ -659,7 +661,7 @@ public class mainFrag extends baseFrag  {
                         public void run() {
                             EventBus.getDefault().post(new deleteFragEvent(getFragTag()));   //  发送消息
                         }
-                    },200);
+                    }, 200);
                     return true;
                 }
             } else {
@@ -722,10 +724,11 @@ public class mainFrag extends baseFrag  {
         }
 
         @Override
-        public void onReceivedError (WebView view, WebResourceRequest request, WebResourceError error) {
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             super.onReceivedError(view, request, error);
 
         }
+
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
@@ -743,7 +746,7 @@ public class mainFrag extends baseFrag  {
     private class ViewTouchListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            if(view.getId() == R.id.web_url_str) {
+            if (view.getId() == R.id.web_url_str) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP && !webUrlStr.hasFocus()) {
                     webUrlStr.setFocusableInTouchMode(true);
                     webUrlStr.requestFocus();
@@ -753,7 +756,7 @@ public class mainFrag extends baseFrag  {
                 webUrlStr.setCursorVisible(true);
                 frameLayout.setVisibility(View.VISIBLE);
                 setStatusOfSearch(1);
-                if(flag == 0) {
+                if (flag == 0) {
                     PopupWindowUrl morePopWindow = new PopupWindowUrl(getActivity(), webHolder.getUrl(), webHolder.getFavicon());
                     morePopWindow.showPopupWindow(webUrlLayout);
                 }
@@ -784,17 +787,17 @@ public class mainFrag extends baseFrag  {
     private class ButtonClickedListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            if(view.getId() == R.id.web_url_search) {
+            if (view.getId() == R.id.web_url_search) {
                 flag = 0;
                 frameLayout.setVisibility(View.GONE);
                 webUrlStr.setFocusableInTouchMode(false);
                 webUrlStr.clearFocus();
                 url = webUrlStr.getText().toString();
-                if(!(url.startsWith("http://")||url.startsWith("https://"))){
-                    url = "https://www.google.com/search?q="+url;
+                if (!(url.startsWith("http://") || url.startsWith("https://"))) {
+                    url = "https://www.google.com/search?q=" + url;
                 }
                 webHolder.loadUrl(url);
-            } else if(view.getId() == R.id.web_url_cancel) {
+            } else if (view.getId() == R.id.web_url_cancel) {
                 url = webHolder.getUrl();
                 webUrlStr.setText(url);
             } else if (view.getId() == R.id.web_url_fresh) {
@@ -802,17 +805,16 @@ public class mainFrag extends baseFrag  {
                 webHolder.loadUrl(url);
             } else if (view.getId() == R.id.pre_button) {
 
-                if(webHolder.canGoBack())
+                if (webHolder.canGoBack())
                     webHolder.goBack();
-                else
-                {
+                else {
                     webHolder.setVisibility(View.GONE);
                 }
 
             } else if (view.getId() == R.id.next_button) {
 
 
-                if(webHolder.canGoForward()) {
+                if (webHolder.canGoForward()) {
                     webHolder.setVisibility(View.VISIBLE);
                     webHolder.goForward();
                 }
@@ -822,166 +824,148 @@ public class mainFrag extends baseFrag  {
             } else if (view.getId() == R.id.window_button) {
                 EventBus.getDefault().post(new windowEvent());
             } else if (view.getId() == R.id.tools_button) {
-                LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
-                View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
-                toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM, 20, tools.getHeight()+40);
-                ///assigning icon for the first time
-                ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
-                privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
-                privateBrowsing.setScaleX(.5f);
-                privateBrowsing.setScaleY(.6f);
+
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                        getContext(), R.style.BottomSheetDialoTheme);
+                //Making a view of Menu to be transparent from the background for Curved corners
+                View bottomSheetView = LayoutInflater.from(getContext())
+                        .inflate(R.layout.pop_window_tools, (LinearLayout) view.findViewById(R.id.BottomSheetContainer));
+
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
+
+                bottomSheetDialogForIconChange = bottomSheetDialog;
 
 
-                ImageView addFavorite = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
-                ImageView showFavorites = (ImageView) toolsPopWindow.getView(R.id.show_favorite_button);
-                ImageView showHistories = (ImageView) toolsPopWindow.getView(R.id.show_history_button);
-                ImageView pageScreenshot = (ImageView) toolsPopWindow.getView(R.id.downloadsbtn);
-//                ImageView windowScreenshot = (ImageView) toolsPopWindow.getView(R.id.window_screenshot);  to take thhe screen shot of webpage
-//menu buttons
-                ImageView sharebtn = (ImageView)toolsPopWindow.getView(R.id.sharebtn);
-                ImageView reloadmenubtn = (ImageView)toolsPopWindow.getView(R.id.reloadmenubtn);
-                ImageView settingsbtn = (ImageView)toolsPopWindow.getView(R.id.settingsbtn);
-                ImageView menudownbtn = (ImageView)toolsPopWindow.getView(R.id.menudownbtn);
-                ImageView exitbtn = (ImageView)toolsPopWindow.getView(R.id.exitbtn);
-                ImageView feedbackbtn = (ImageView)toolsPopWindow.getView(R.id.feedbackbtn);
-                ImageView themesbtn = (ImageView)toolsPopWindow.getView(R.id.themesbtn);
-                ImageView nightmodebtnbtn = (ImageView)toolsPopWindow.getView(R.id.nightmodebtnbtn);
+                ////******************************* MENU BUTTONS ********************///////
+                /////showbookmarks button
+                bottomSheetView.findViewById(R.id.showbookmarksbtn).setOnClickListener(toolsClickedListener);
+                /////////////////////////////////////////BOOKMARK BUTTON CLICKED HERE
+                bottomSheetView.findViewById(R.id.addbookmarkbtn).setOnClickListener(toolsClickedListener);
+                //Show History from Menu//
+                bottomSheetView.findViewById(R.id.showhistorybtn).setOnClickListener(toolsClickedListener);
+                //Show Downloads From Menu//
+                bottomSheetView.findViewById(R.id.showdownloadsbtn).setOnClickListener(toolsClickedListener);
+                //Incognito From Menu//
+                bottomSheetView.findViewById(R.id.incognitobtn).setOnClickListener(toolsClickedListener);
+                /////setting the icon for the first time as the menu opens
+                if (incognito == 1) {
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setBackgroundResource(R.drawable.incognitoon);
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setScaleY(.6f);
+                } else {
 
-//              This is for editing page very good feature
-//              ImageView pageEdit = (ImageView) toolsPopWindow.getView(R.id.page_edit);
-//              pageEdit.setOnClickListener(toolsClickedListener);
-                sharebtn.setOnClickListener(toolsClickedListener);
-                privateBrowsing.setOnClickListener(toolsClickedListener);
-                addFavorite.setOnClickListener(toolsClickedListener);
-                showFavorites.setOnClickListener(toolsClickedListener);
-                showHistories.setOnClickListener(toolsClickedListener);
-                pageScreenshot.setOnClickListener(toolsClickedListener);
-                themesbtn.setOnClickListener(toolsClickedListener);
-                nightmodebtnbtn.setOnClickListener(toolsClickedListener);
-//                windowScreenshot.setOnClickListener(toolsClickedListener);
-
-                settingsbtn.setOnClickListener(toolsClickedListener);
-                menudownbtn.setOnClickListener(toolsClickedListener);
-                exitbtn.setOnClickListener(toolsClickedListener);
-                reloadmenubtn.setOnClickListener(toolsClickedListener);
-                feedbackbtn.setOnClickListener(toolsClickedListener);
-
-                if(nightmode == 1)
-                {
-
-                    settingsbtn.setBackgroundResource(R.drawable.nightsetting);
-                    settingsbtn.setScaleX(.3f);
-                    settingsbtn.setScaleY(.6f);
-
-
-                    menudownbtn.setBackgroundResource(R.drawable.nightdownarrow);
-                    menudownbtn.setScaleX(.3f);
-                    menudownbtn.setScaleY(.6f);
-
-
-                    exitbtn.setBackgroundResource(R.drawable.nightpowera);
-                    exitbtn.setScaleX(.3f);
-                    exitbtn.setScaleY(.6f);
-                    //change background black
-                    if(incognito == 0)
-                    {
-                        privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
-                        privateBrowsing.setScaleX(.5f);
-                        privateBrowsing.setScaleY(.6f);
-                    }
-                    else
-                    {
-                        privateBrowsing.setBackgroundResource(R.drawable.nightincognitoon);
-                        privateBrowsing.setScaleX(.5f);
-                        privateBrowsing.setScaleY(.6f);
-                    }
-
-
-                    feedbackbtn.setBackgroundResource(R.drawable.nightfeedback);
-                    feedbackbtn.setScaleX(.5f);
-                    feedbackbtn.setScaleY(.6f);
-
-                    reloadmenubtn.setBackgroundResource(R.drawable.nightrefresh);
-                    reloadmenubtn.setScaleX(.5f);
-                    reloadmenubtn.setScaleY(.6f);
-
-                    nightmodebtnbtn.setBackgroundResource(R.drawable.sun);
-                    nightmodebtnbtn.setScaleX(.5f);
-                    nightmodebtnbtn.setScaleY(.6f);
-
-                    addFavorite.setBackgroundResource(R.drawable.nightstar);
-                    addFavorite.setScaleX(.5f);
-                    addFavorite.setScaleY(.6f);
-
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setBackgroundResource(R.drawable.incognitooff);
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setScaleY(.6f);
                 }
-                else
-                {
-                    settingsbtn.setBackgroundResource(R.drawable.setting);
-                    settingsbtn.setScaleX(.3f);
-                    settingsbtn.setScaleY(.6f);
+                //Show Themes From Menu//
+                bottomSheetView.findViewById(R.id.showthemesbtn).setOnClickListener(toolsClickedListener);
+                //Night Mode From Menu//
+                bottomSheetView.findViewById(R.id.nightmodebtnbtn).setOnClickListener(toolsClickedListener);
 
-                    menudownbtn.setBackgroundResource(R.drawable.downarrow);
-                    menudownbtn.setScaleX(.3f);
-                    menudownbtn.setScaleY(.6f);
+//////////Assigning night mode buttons
+                if (nightmode == 1) {
+                    bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn).setBackgroundResource(R.drawable.sun);
+                    bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn).setScaleX(.65f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn).setScaleY(.75f);
 
-                    exitbtn.setBackgroundResource(R.drawable.powera);
-                    exitbtn.setScaleX(.3f);
-                    exitbtn.setScaleY(.6f);
-                    //change background black
-                    if(incognito == 0)
-                    {
-                        privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
-                        privateBrowsing.setScaleX(.5f);
-                        privateBrowsing.setScaleY(.6f);
-                    }
-                    else
-                    {
-                        privateBrowsing.setBackgroundResource(R.drawable.incognitoon);
-                        privateBrowsing.setScaleX(.5f);
-                        privateBrowsing.setScaleY(.6f);
-                    }
-
-                    feedbackbtn.setBackgroundResource(R.drawable.feedback);
-                    feedbackbtn.setScaleX(.5f);
-                    feedbackbtn.setScaleY(.6f);
-
-                    reloadmenubtn.setBackgroundResource(R.drawable.reload);
-                    reloadmenubtn.setScaleX(.5f);
-                    reloadmenubtn.setScaleY(.6f);
-
-                    nightmodebtnbtn.setBackgroundResource(R.drawable.moon);
-                    nightmodebtnbtn.setScaleX(.5f);
-                    nightmodebtnbtn.setScaleY(.6f);
-
-                    addFavorite.setBackgroundResource(R.drawable.star);
-                    addFavorite.setScaleX(.5f);
-                    addFavorite.setScaleY(.6f);
+                } else {
+                    bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn).setBackgroundResource(R.drawable.moon);
+                    bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn).setScaleY(.6f);
                 }
+                //Reload Webpage From Menu//
+                bottomSheetView.findViewById(R.id.reloadmenubtn).setOnClickListener(toolsClickedListener);
+                //Show Feedback From Menu//
+                bottomSheetView.findViewById(R.id.feedbackbtn).setOnClickListener(toolsClickedListener);
+                //Show Share From Menu//
+                bottomSheetView.findViewById(R.id.sharebtn).setOnClickListener(toolsClickedListener);
+                ///Show Settings from Menu//
+                bottomSheetView.findViewById(R.id.settingsbtn).setOnClickListener(toolsClickedListener);
+                ////Menu down button
+                bottomSheetView.findViewById(R.id.menudownbtn).setOnClickListener(toolsClickedListener);
+                ///Exit button
+                bottomSheetView.findViewById(R.id.exitbtn).setOnClickListener(toolsClickedListener);
+//showing the star icon when cliccked on menu
+                bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn).setBackgroundResource(R.drawable.star);
+                bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn).setScaleX(.5f);
+                bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn).setScaleY(.6f);
+
+                cardView = bottomSheetView.findViewById(R.id.menuBar);
+                if (nightmode == 1) {
+                    bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn).setBackgroundResource(R.drawable.nightstar);
+                    bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn).setScaleY(.6f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn).setBackgroundResource(R.drawable.nightrefresh);
+                    bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn).setScaleY(.6f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn).setBackgroundResource(R.drawable.nightfeedback);
+                    bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn).setScaleY(.6f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setBackgroundResource(R.drawable.nightincognitooff);
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn).setScaleY(.6f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.menudownbtn).setBackgroundResource(R.drawable.nightdownarrow);
+                    bottomSheetDialogForIconChange.findViewById(R.id.menudownbtn).setScaleX(.2f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.menudownbtn).setScaleY(.4f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.settingsbtn).setBackgroundResource(R.drawable.nightsetting);
+                    bottomSheetDialogForIconChange.findViewById(R.id.settingsbtn).setScaleX(.25f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.settingsbtn).setScaleY(.5f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setBackgroundResource(R.drawable.nightpowera);
+                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setScaleX(.25f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setScaleY(.5f);
+
+                    cardView.setCardBackgroundColor(Color.DKGRAY);
+                } else {
+                    bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn).setBackgroundResource(R.drawable.refresh);
+                    bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn).setScaleY(.6f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn).setBackgroundResource(R.drawable.feedback);
+                    bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn).setScaleX(.5f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn).setScaleY(.6f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.menudownbtn).setBackgroundResource(R.drawable.downarrow);
+                    bottomSheetDialogForIconChange.findViewById(R.id.menudownbtn).setScaleX(.2f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.menudownbtn).setScaleY(.4f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.settingsbtn).setBackgroundResource(R.drawable.setting);
+                    bottomSheetDialogForIconChange.findViewById(R.id.settingsbtn).setScaleX(.25f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.settingsbtn).setScaleY(.5f);
+
+                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setBackgroundResource(R.drawable.powera);
+                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setScaleX(.25f);
+                    bottomSheetDialogForIconChange.findViewById(R.id.exitbtn).setScaleY(.5f);
+                    cardView.setCardBackgroundColor(Color.WHITE);
+                }
+
+
             }
         }
     }
+
     //功能弹出窗口按钮
     private class ToolsClickedListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.private_browsing) {
+            if (view.getId() == R.id.incognitobtn) {
                 //无痕浏览
-                if (isPrivateBrowsing){
+                if (isPrivateBrowsing) {
 
-                    LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
-                    View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
-                    toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM| Gravity.RIGHT, 20, tools.getHeight()+40);
-
-                    if(nightmode == 1)
-                    {
-                        ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                    if (nightmode == 1) {
+                        ImageView privateBrowsing = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn);
                         privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
                         privateBrowsing.setScaleX(.5f);
                         privateBrowsing.setScaleY(.6f);
-                    }
-                    else
-                    {
-                        ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                    } else {
+                        ImageView privateBrowsing = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn);
                         privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
                         privateBrowsing.setScaleX(.5f);
                         privateBrowsing.setScaleY(.6f);
@@ -989,22 +973,13 @@ public class mainFrag extends baseFrag  {
 
                     Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = false;
-
+                    incognito = 0;
                     changebackground();
 
-                    incognito = 0 ;
-
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(), Incognito.class);
-                    intent.putExtra("type", "incognito");
-                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOOFF);
-
                 } else {
-                    LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
-                    View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
-                    toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM| Gravity.RIGHT, 20, tools.getHeight()+40);
                     ////changing the icon of the incognito mode
-                    ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                    ImageView privateBrowsing = bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn);
+
                     privateBrowsing.setBackgroundResource(R.drawable.incognitoon);
                     privateBrowsing.setScaleX(.5f);
                     privateBrowsing.setScaleY(.6f);
@@ -1015,113 +990,100 @@ public class mainFrag extends baseFrag  {
                     incognito = 1;
                 }
 
-            } else if (view.getId() == R.id.add_favorite_button) {
+            } else if (view.getId() == R.id.addbookmarkbtn) {
                 //添加书签
                 favAndHisManager.addFavorite(title, url);
                 favAndHisManager.getAllFavorites();
                 Toast.makeText(getActivity(), "Page saved", Toast.LENGTH_SHORT).show();
-            } else if (view.getId() ==R.id.show_favorite_button) {
+            } else if (view.getId() == R.id.showbookmarksbtn) {
                 //View and edit bookmarks
-                toolsPopWindow.dismiss();
+                bottomSheetDialogForIconChange.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), FavAndHisActivity.class);
                 intent.putExtra("type", "favorite");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_FAV_OR_HIS);
-            } else if (view.getId() == R.id.show_history_button) {
+            } else if (view.getId() == R.id.showhistorybtn) {
                 //View edit history
-                toolsPopWindow.dismiss();
+                bottomSheetDialogForIconChange.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), FavAndHisActivity.class);
                 intent.putExtra("type", "history");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_FAV_OR_HIS);
 
-            }else if(view.getId() == R.id.themesbtn)
-            {
-                toolsPopWindow.dismiss();
+            } else if (view.getId() == R.id.showthemesbtn) {
+                bottomSheetDialogForIconChange.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), Theme.class);
                 intent.putExtra("type", "theme");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_THEMES);
-            }
-            else if(view.getId() == R.id.nightmodebtnbtn)
-            {
+            } else if (view.getId() == R.id.nightmodebtnbtn) {
 
-                if(nightmode == 0)
-                {
+                if (nightmode == 0) {
 
-                    LinearLayout menuback = (LinearLayout) toolsPopWindow.getView(R.id.menuback);
-                    LinearLayout menuback1 = (LinearLayout) toolsPopWindow.getView(R.id.menuback1);
-                    menuback.setBackgroundColor(Color.DKGRAY);
-                    menuback1.setBackgroundColor(Color.DKGRAY);
-
-                    toolsPopWindow.dismiss();
+                    bottomSheetDialogForIconChange.dismiss();
                     nightmode = 1;
-                    final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+                    final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("nightmode", String.valueOf(nightmode));
                     editor.apply();
                     //change background black
                     linear.setBackgroundResource(R.drawable.nightmodeon);
-                    ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                    ImageView privateBrowsing = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn);
 
                     privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
                     privateBrowsing.setScaleX(.5f);
                     privateBrowsing.setScaleY(.6f);
 
-                    ImageView feedbackbtn = (ImageView) toolsPopWindow.getView(R.id.feedbackbtn);
+                    ImageView feedbackbtn = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn);
                     feedbackbtn.setBackgroundResource(R.drawable.nightfeedback);
                     feedbackbtn.setScaleX(.5f);
                     feedbackbtn.setScaleY(.6f);
 
-                    ImageView reloadmenubtn = (ImageView) toolsPopWindow.getView(R.id.reloadmenubtn);
+                    ImageView reloadmenubtn = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn);
                     reloadmenubtn.setBackgroundResource(R.drawable.nightrefresh);
                     reloadmenubtn.setScaleX(.5f);
                     reloadmenubtn.setScaleY(.6f);
 
-                    ImageView nightmodebtnbtn = (ImageView) toolsPopWindow.getView(R.id.nightmodebtnbtn);
+                    ImageView nightmodebtnbtn = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn);
                     nightmodebtnbtn.setBackgroundResource(R.drawable.sun);
                     nightmodebtnbtn.setScaleX(.65f);
                     nightmodebtnbtn.setScaleY(.75f);
 
-                    ImageView add_favorite_button = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
+                    ImageView add_favorite_button = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn);
                     add_favorite_button.setBackgroundResource(R.drawable.nightstar);
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
 
-                }
-                else
-                {
+                } else {
                     //CHANGE MENU BACKGROUND
-                    LinearLayout menuback = (LinearLayout) toolsPopWindow.getView(R.id.menuback);
-                    menuback.setBackgroundColor(Color.WHITE);
                     nightmode = 0;
 //change background according to theme
 
-                    toolsPopWindow.dismiss();
+                    bottomSheetDialogForIconChange.dismiss();
 
-                    final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+                    final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("nightmode", String.valueOf(nightmode));
                     editor.apply();
                     //change background back
                     changebackground();
 
-                    ImageView feedbackbtn = (ImageView) toolsPopWindow.getView(R.id.feedbackbtn);
+                    ImageView feedbackbtn = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.feedbackbtn);
                     feedbackbtn.setBackgroundResource(R.drawable.feedback);
                     feedbackbtn.setScaleX(.5f);
                     feedbackbtn.setScaleY(.6f);
 
-                    ImageView reloadmenubtn = (ImageView) toolsPopWindow.getView(R.id.reloadmenubtn);
+                    ImageView reloadmenubtn = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.reloadmenubtn);
                     reloadmenubtn.setBackgroundResource(R.drawable.reload);
                     reloadmenubtn.setScaleX(.5f);
                     reloadmenubtn.setScaleY(.6f);
 
-                    ImageView nightmodebtnbtn = (ImageView) toolsPopWindow.getView(R.id.nightmodebtnbtn);
+                    ImageView nightmodebtnbtn = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.nightmodebtnbtn);
                     nightmodebtnbtn.setBackgroundResource(R.drawable.moon);
                     nightmodebtnbtn.setScaleX(.5f);
                     nightmodebtnbtn.setScaleY(.6f);
 
-                    ImageView add_favorite_button = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
+                    ImageView add_favorite_button = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.addbookmarkbtn);
                     add_favorite_button.setBackgroundResource(R.drawable.star);
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
@@ -1129,11 +1091,8 @@ public class mainFrag extends baseFrag  {
                 }
 
 
-            }
-
-            else if(view.getId() == R.id.downloadsbtn)
-            {
-                toolsPopWindow.dismiss();
+            } else if (view.getId() == R.id.showdownloadsbtn) {
+                bottomSheetDialogForIconChange.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), DownloaderNew.class);
                 intent.putExtra("type", "download");
@@ -1142,7 +1101,7 @@ public class mainFrag extends baseFrag  {
             //To take screen shot of the web page
 //            else if (view.getId() == R.id.window_screenshot) {
 //                //网页截图或全屏截图
-//                toolsPopWindow.dismiss();
+//                bottomSheetDialogForIconChange.dismiss();
 //                verifyStoragePermissions(getActivity());
 //                View sView;
 //                String tempImgName;
@@ -1189,8 +1148,7 @@ public class mainFrag extends baseFrag  {
 //                saveImageToChoosePath.show();
 //
 //            }
-            else if(view.getId() == R.id.sharebtn)
-            {
+            else if (view.getId() == R.id.sharebtn) {
 
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
@@ -1200,32 +1158,21 @@ public class mainFrag extends baseFrag  {
                 myIntent.putExtra(Intent.EXTRA_TEXT, body);
                 startActivity(Intent.createChooser(myIntent, "Share Using"));
 
-            }
-
-            else if(view.getId() == R.id.reloadmenubtn)
-            {
+            } else if (view.getId() == R.id.reloadmenubtn) {
                 url = webHolder.getUrl();
                 webHolder.loadUrl(url);
-            }
-            else if(view.getId() == R.id.exitbtn)
-            {
+            } else if (view.getId() == R.id.exitbtn) {
 
-            }
-            else if(view.getId() == R.id.settingsbtn)
-            {
-                toolsPopWindow.dismiss();
+            } else if (view.getId() == R.id.settingsbtn) {
+                bottomSheetDialogForIconChange.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), Settings.class);
                 intent.putExtra("type", "settings");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_SETTINGS);
-            }
-            else if(view.getId() == R.id.menudownbtn)
-            {
-                toolsPopWindow.dismiss();
-            }
-            else if(view.getId() == R.id.feedbackbtn)
-            {
-                toolsPopWindow.dismiss();
+            } else if (view.getId() == R.id.menudownbtn) {
+                bottomSheetDialogForIconChange.dismiss();
+            } else if (view.getId() == R.id.feedbackbtn) {
+                bottomSheetDialogForIconChange.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), Feedback.class);
                 intent.putExtra("type", "feedback");
@@ -1234,7 +1181,7 @@ public class mainFrag extends baseFrag  {
 
 //            else if (view.getId() == R.id.page_edit) {
 //                //编辑网页
-//                toolsPopWindow.dismiss();
+//                bottomSheetDialogForIconChange.dismiss();
 //                View sView;
 //                sView = getActivity().getWindow().getDecorView();
 //                final Bitmap sBitmap = Bitmap.createBitmap(sView.getWidth(), sView.getHeight(), Bitmap.Config.ARGB_8888);
@@ -1248,8 +1195,7 @@ public class mainFrag extends baseFrag  {
         }
     }
 
-    private void changenightmodeicon(int nightmode)
-    {
+    private void changenightmodeicon(int nightmode) {
 
     }
 
@@ -1262,13 +1208,13 @@ public class mainFrag extends baseFrag  {
 
         public ImageClickedListener(int type, String value) {
             this.type = type;
-            this.value =value;
+            this.value = value;
         }
 
         @Override
         public void onClick(View v) {
             itemLongClickedPopWindow.dismiss();
-            if (v.getId() ==R.id.item_longclicked_viewImage) {
+            if (v.getId() == R.id.item_longclicked_viewImage) {
                 //查看图片
                 new RequestShowImageOnline(getActivity()).execute(value);
             } else if (v.getId() == R.id.item_longclicked_saveImage) {
@@ -1329,7 +1275,7 @@ public class mainFrag extends baseFrag  {
 
         public AchorClickedListener(int type, String value) {
             this.type = type;
-            this.value =value;
+            this.value = value;
         }
 
         @Override
@@ -1338,17 +1284,19 @@ public class mainFrag extends baseFrag  {
             if (v.getId() == R.id.item_longclicked_openAchor) {
                 webHolder.loadUrl(value);
             } else if (v.getId() == R.id.item_longclicked_copyAchor) {
-                clipboardManager = (ClipboardManager)getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboardManager.setPrimaryClip(ClipData.newPlainText(null, url));
                 Toast.makeText(getActivity(), "URL copied", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
     public class WebUrlStrWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
 
         }
+
         public void afterTextChanged(Editable editable) {
 
         }
@@ -1359,12 +1307,10 @@ public class mainFrag extends baseFrag  {
     }
 
 
-
-
     /*
-    * WebChromeClient
-    * ProgressBar
-    * */
+     * WebChromeClient
+     * ProgressBar
+     * */
     private class MyChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
@@ -1381,6 +1327,7 @@ public class mainFrag extends baseFrag  {
                 webProgressBar.setProgress(newProgress);
             }
         }
+
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
@@ -1400,12 +1347,12 @@ public class mainFrag extends baseFrag  {
     }
 
     /*
-    * TODO add gesture
-    * distinguish the gesture on WebView
-    * hide the webUrlLayout when Fling down
-    * appear the webUrlLayout when Fling up
-    * */
-    private class GestureListener implements GestureDetector.OnGestureListener{
+     * TODO add gesture
+     * distinguish the gesture on WebView
+     * hide the webUrlLayout when Fling down
+     * appear the webUrlLayout when Fling up
+     * */
+    private class GestureListener implements GestureDetector.OnGestureListener {
         @Override
         public boolean onDown(MotionEvent e) {
             return false;
@@ -1443,12 +1390,14 @@ public class mainFrag extends baseFrag  {
         }
     }
 
-    private static class PointerXY{
+    private static class PointerXY {
         public static int x;
         public static int y;
+
         public static int getX() {
             return x;
         }
+
         public static int getY() {
             return y;
         }
@@ -1503,10 +1452,10 @@ public class mainFrag extends baseFrag  {
         }
     }
     /*
-    * back button(mobile)
-    * one: the last page
-    * twice: exit program
-    * */
+     * back button(mobile)
+     * one: the last page
+     * twice: exit program
+     * */
 //    Handler mHandler = new Handler() {
 //        @Override
 //        public void handleMessage(Message msg) {
@@ -1533,14 +1482,12 @@ public class mainFrag extends baseFrag  {
 //    }
 
     /*
-    * change the status of search button
-    * search
-    * cancel
-    * fresh
-    * three status
-    * */
-
-
+     * change the status of search button
+     * search
+     * cancel
+     * fresh
+     * three status
+     * */
 
 
     public void setStatusOfSearch(int status) {
@@ -1549,7 +1496,7 @@ public class mainFrag extends baseFrag  {
             webUrlSearch.setVisibility(View.VISIBLE);
             webUrlCancel.setVisibility(View.GONE);
             webUrlFresh.setVisibility(View.GONE);
-        } else if(status == 2) {
+        } else if (status == 2) {
             //cancel status
             webUrlSearch.setVisibility(View.GONE);
             webUrlCancel.setVisibility(View.VISIBLE);
@@ -1563,11 +1510,11 @@ public class mainFrag extends baseFrag  {
     }
 
     /*
-         *set the status of bottom buttons
-         * GoBack
-         * GoForward
-         */
-   // to change the status of the back and  forward button
+     *set the status of bottom buttons
+     * GoBack
+     * GoForward
+     */
+    // to change the status of the back and  forward button
 //    public void changeStatusOfBottomButton() {
 //        if (webHolder.canGoBack()) {
 //            pagePre.setEnabled(true);
@@ -1616,12 +1563,10 @@ public class mainFrag extends baseFrag  {
 
         nightmode = Integer.parseInt(sharedPreferences.getString("nightmode", "0"));
 
-        if(nightmode ==1)
-        {
+        if (nightmode == 1) {
             linear.setBackgroundResource(R.drawable.nightmodeon);
-        }
-        else
-        {
+        } else {
+
             switch (themeNumber) {
                 case 1:
                     linear.setBackgroundResource(R.drawable.back1);
@@ -1645,21 +1590,21 @@ public class mainFrag extends baseFrag  {
         }
 
 
-
     }
 
     //获取存储权限
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE ={
+    private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE};
 
-    public static void verifyStoragePermissions(Activity activity){
+    public static void verifyStoragePermissions(Activity activity) {
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if(permission != PackageManager.PERMISSION_GRANTED){
+        if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         }
     }
+
     public void onRefresh() {
 //        url = webHolder.getUrl();
 //        webHolder.loadUrl(url);
