@@ -909,7 +909,7 @@ public class mainFrag extends baseFrag  {
                 }
                 else
                 {
-                    settingsbtn.setBackgroundResource(R.drawable.settings);
+                    settingsbtn.setBackgroundResource(R.drawable.setting);
                     settingsbtn.setScaleX(.3f);
                     settingsbtn.setScaleY(.6f);
 
@@ -964,11 +964,21 @@ public class mainFrag extends baseFrag  {
                     View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
                     toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM| Gravity.RIGHT, 20, tools.getHeight()+40);
 
+                    if(nightmode == 1)
+                    {
+                        ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                        privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
+                        privateBrowsing.setScaleX(.5f);
+                        privateBrowsing.setScaleY(.6f);
+                    }
+                    else
+                    {
+                        ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
+                        privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
+                        privateBrowsing.setScaleX(.5f);
+                        privateBrowsing.setScaleY(.6f);
+                    }
 
-                    ImageView privateBrowsing = (ImageView) toolsPopWindow.getView(R.id.private_browsing);
-                    privateBrowsing.setBackgroundResource(R.drawable.incognitooff);
-                    privateBrowsing.setScaleX(.5f);
-                    privateBrowsing.setScaleY(.6f);
 
                     Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = false;
@@ -1023,13 +1033,14 @@ public class mainFrag extends baseFrag  {
             }
             else if(view.getId() == R.id.nightmodebtnbtn)
             {
+
                 if(nightmode == 0)
                 {
 
                     LinearLayout menuback = (LinearLayout) toolsPopWindow.getView(R.id.menuback);
                     LinearLayout menuback1 = (LinearLayout) toolsPopWindow.getView(R.id.menuback1);
-                    menuback.setBackgroundColor(Color.GRAY);
-                    menuback1.setBackgroundColor(Color.GRAY);
+                    menuback.setBackgroundColor(Color.DKGRAY);
+                    menuback1.setBackgroundColor(Color.DKGRAY);
 
                     toolsPopWindow.dismiss();
                     nightmode = 1;
@@ -1057,8 +1068,8 @@ public class mainFrag extends baseFrag  {
 
                     ImageView nightmodebtnbtn = (ImageView) toolsPopWindow.getView(R.id.nightmodebtnbtn);
                     nightmodebtnbtn.setBackgroundResource(R.drawable.sun);
-                    nightmodebtnbtn.setScaleX(.5f);
-                    nightmodebtnbtn.setScaleY(.6f);
+                    nightmodebtnbtn.setScaleX(.65f);
+                    nightmodebtnbtn.setScaleY(.75f);
 
                     ImageView add_favorite_button = (ImageView) toolsPopWindow.getView(R.id.add_favorite_button);
                     add_favorite_button.setBackgroundResource(R.drawable.nightstar);
@@ -1071,18 +1082,19 @@ public class mainFrag extends baseFrag  {
                     //CHANGE MENU BACKGROUND
                     LinearLayout menuback = (LinearLayout) toolsPopWindow.getView(R.id.menuback);
                     menuback.setBackgroundColor(Color.WHITE);
+                    nightmode = 0;
 //change background according to theme
-                    changebackground();
+
 
 
                     toolsPopWindow.dismiss();
-                    nightmode = 0;
+
                     final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("nightmode", String.valueOf(nightmode));
                     editor.apply();
-                    //change background black
-
+                    //change background back
+                    changebackground();
 
                     ImageView feedbackbtn = (ImageView) toolsPopWindow.getView(R.id.feedbackbtn);
                     feedbackbtn.setBackgroundResource(R.drawable.feedback);
