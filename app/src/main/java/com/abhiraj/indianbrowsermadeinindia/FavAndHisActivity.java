@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -28,7 +29,8 @@ public class FavAndHisActivity extends Activity {
     //deleting history if clear history chhecked
     public static final String SHARED_PREFS = "sharedPrefs";
     int clearhistory = 0;
-    int ii ;
+
+    LinearLayout back;
 
     public static final int RESULT_FAV_HIS = 0;
     private static final int RESULT_DEFAULT = -1;
@@ -85,6 +87,8 @@ public class FavAndHisActivity extends Activity {
             setContentView(historyView);
             this.favoriteContent = (ListView) favoriteView.findViewById(R.id.favorites_item_content);
             this.historyContent = (ListView) this.findViewById(R.id.histories_item_content);
+
+            back = findViewById(R.id.historyback);
         }
 
         this.itemLongListener = new ListViewOnItemLongListener();
@@ -127,6 +131,7 @@ public class FavAndHisActivity extends Activity {
 
     }
 
+
     //Initialize the data in the ListView
     @SuppressWarnings("deprecation")
     private void initDataFavorites() {
@@ -138,6 +143,7 @@ public class FavAndHisActivity extends Activity {
                 new String[]{"_id", "name", "url"},
                 new int[]{R.id.item_id, R.id.item_name, R.id.item_url});
         this.favoriteContent.setAdapter(this.favAndHisAdapter);
+
     }
 
     //
