@@ -64,6 +64,8 @@ public class FavAndHisActivity extends Activity {
         Bundle bundle = intent.getExtras();
         type = bundle.getString("type");
 
+        //getting values for deleteing the history is checked clear history in exit menu
+
         LayoutInflater favAndHisInflater = LayoutInflater.from(getApplicationContext());
         favoriteView = favAndHisInflater.inflate(R.layout.view_favorite, null);
         historyView = favAndHisInflater.inflate(R.layout.view_history, null);

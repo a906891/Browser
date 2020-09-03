@@ -2,7 +2,9 @@ package com.abhiraj.indianbrowsermadeinindia;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.test.espresso.core.deps.guava.eventbus.Subscribe;
 import android.support.v4.app.FragmentActivity;
@@ -10,14 +12,17 @@ import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import com.abhiraj.indianbrowsermadeinindia.constance.fragConst;
@@ -39,11 +44,15 @@ import de.greenrobot.event.EventBus;
 
 import static android.widget.RelativeLayout.*;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
+
+    int donotshowagain = 0;
+    public static final String SHARED_PREFS = "sharedPrefs";
+
 
     private verticalViewPager mViewPager;
     private fragAdapter fragPagerAdapter;
-    private  int thewidth,theheight;
+    private int thewidth, theheight;
 
     private LinearLayout llayoutviewpage;
     private LinearLayout pagebarlt;
@@ -63,7 +72,6 @@ public class MainActivity extends FragmentActivity {
     public static final int REQUEST_OPEN_THEMES = 0; //for openning themes
 
     public static final int REQUEST_OPEN_INCOGNITOOFF = 0; //for openning themes
-
 
 
     public static final int REQUEST_SAVE_IMAGE_PATH = 0;
@@ -112,7 +120,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-       // mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        // mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         dm2 = getResources().getDisplayMetrics();//获取手机分辨率
     }
 
@@ -153,8 +161,8 @@ public class MainActivity extends FragmentActivity {
     private boolean currentIsFull = true;//当前是不是全屏
 
     private void zoomchange() {
-        Log.d("before","enlarge  " + thewidth + " ----  " + dm2.widthPixels);
-        Log.d("before","enlarge  " + theheight + " ----  " + dm2.heightPixels);
+        Log.d("before", "enlarge  " + thewidth + " ----  " + dm2.widthPixels);
+        Log.d("before", "enlarge  " + theheight + " ----  " + dm2.heightPixels);
         if (dm2.widthPixels - mViewPager.getWidth() < 5) {
             mViewPager.setPageMargin(fragConst.page_interval);
             //   Logger.v("缩小  " + thewidth);
@@ -174,8 +182,8 @@ public class MainActivity extends FragmentActivity {
             pagebarlt.setVisibility(VISIBLE);
             EventBus.getDefault().post(new zoomEvent(false));
         } else {
-                Log.d("test","enlarge  " + thewidth + " ----  " + dm2.widthPixels);
-            Log.d("test","enlarge  " + thewidth + " ----  " + dm2.heightPixels);
+            Log.d("test", "enlarge  " + thewidth + " ----  " + dm2.widthPixels);
+            Log.d("test", "enlarge  " + thewidth + " ----  " + dm2.heightPixels);
             mViewPager.setPageMargin(0);
             llayoutviewpage.setGravity(CENTER_IN_PARENT);
             //放大到原来样子
@@ -284,9 +292,10 @@ public class MainActivity extends FragmentActivity {
         }
         return onTouchEvent(ev);
     }
-    public  boolean isShouldHideInput(View v, MotionEvent event) {
+
+    public boolean isShouldHideInput(View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {
-            int[] leftTop = { 0, 0 };
+            int[] leftTop = {0, 0};
             //get location of TextView
             v.getLocationInWindow(leftTop);
             int left = leftTop[0];
@@ -311,5 +320,96 @@ public class MainActivity extends FragmentActivity {
         fragConst.new_mainfrag_count = 0; //调用次数清0
     }
 
+    CheckBox ClearHistory;
+    CheckBox doNotShowAgain;
+    Dialog exit;
 
+    @Override
+    public void onBackPressed() {
+
+        if (donotshowagain == 0) {
+            Dialog bottomSheetDialog = new Dialog(
+                    MainActivity.this, R.style.BottomSheetDialoTheme);
+            //Making a view of Menu to be transparent from the background for Curved corners
+            View bottomSheetView = LayoutInflater.from(getApplicationContext())
+                    .inflate(R.layout.activity_exit, (LinearLayout) findViewById(R.id.BottomSheetContainer));
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            exit = bottomSheetDialog;
+            bottomSheetDialog.show();
+
+            bottomSheetDialog.findViewById(R.id.exitconfirmbtn).setOnClickListener(this);
+
+            bottomSheetDialog.findViewById(R.id.clearHistory).setOnClickListener(this);
+            ClearHistory = bottomSheetDialog.findViewById(R.id.clearHistory);
+
+            bottomSheetDialog.findViewById(R.id.doNotShowAgain).setOnClickListener(this);
+            doNotShowAgain = bottomSheetDialog.findViewById(R.id.doNotShowAgain);
+        } else {
+            finishAffinity();
+            System.exit(0);
+        }
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.exitconfirmbtn:
+                if (ClearHistory.isChecked()) {
+                    Toast.makeText(this, "History Delete on", Toast.LENGTH_SHORT).show();
+                    final SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("ClearHistroy", String.valueOf(1));
+                    editor.apply();
+                } else {
+                    Toast.makeText(this, "History delete off", Toast.LENGTH_SHORT).show();
+                    final SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("ClearHistroy", String.valueOf(0));
+                    editor.apply();
+                }
+//exit dialog box
+                exit.dismiss();
+//exit application
+                finishAffinity();
+                System.exit(0);
+                break;
+            case R.id.clearHistory:
+                if (ClearHistory.isChecked()) {
+                    final SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                    editor1.putString("ClearHistory", String.valueOf(1));
+                    editor1.apply();
+                    Toast.makeText(this, "clear history", Toast.LENGTH_SHORT).show();
+
+
+                } else if (!ClearHistory.isChecked()) {
+                    final SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                    editor1.putString("ClearHistory", String.valueOf(0));
+                    editor1.apply();
+                    Toast.makeText(this, "no clear history", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.doNotShowAgain:
+                if (doNotShowAgain.isChecked()) {
+                    final SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                    editor1.putString("show", String.valueOf(1));
+                    editor1.apply();
+                    Toast.makeText(this, "do not show again", Toast.LENGTH_SHORT).show();
+
+                } else if (!doNotShowAgain.isChecked()) {
+                    final SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                    editor1.putString("show", String.valueOf(0));
+                    editor1.apply();
+                    Toast.makeText(this, "show again", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+        }
+    }
 }
