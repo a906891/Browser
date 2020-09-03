@@ -311,4 +311,5 @@ public class MainActivity extends FragmentActivity {
         fragConst.new_mainfrag_count = 0; //调用次数清0
     }
 
+
 }

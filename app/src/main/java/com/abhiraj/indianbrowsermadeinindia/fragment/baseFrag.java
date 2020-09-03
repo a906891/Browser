@@ -1,8 +1,13 @@
 package com.abhiraj.indianbrowsermadeinindia.fragment;
 
+import android.app.Dialog;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+
+import com.abhiraj.indianbrowsermadeinindia.R;
 
 /**
  * Created by Administrator on 2016/11/28.
@@ -23,6 +28,7 @@ public class baseFrag extends Fragment implements View.OnTouchListener {
 
         return true;
     }
+
 
 
 }

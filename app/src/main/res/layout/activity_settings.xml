@@ -5,83 +5,297 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Settings"
-    android:layout_marginStart="10dp">
+    tools:context=".Settings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="Settings"
+            android:layout_marginLeft="15dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:id="@+id/setDefaultBrowserbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Set as Default Browser"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="7dp">
+
+            <TextView
+                android:id="@+id/downloadSettingsbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Download Settings"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext"  />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/searchSetttingsbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Search Settings"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/adBlockerbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Ad Blocker"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext"  />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
 
 
-    <Button
-        android:id="@+id/setDefaultBrowserbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Set as Default Browser"
-        android:layout_marginTop="50dp"
-        android:background="@color/transparent"
-        android:textAlignment="textStart"/>
+        <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/downloadSettingsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Download Settings"
-        android:background="@color/transparent"
-        android:textAlignment="textStart"/>
+            <TextView
+                android:id="@+id/clearRecordsbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Clear Records"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext"  />
 
-    <Button
-        android:id="@+id/searchSetttingsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search Settings"
-        android:background="@color/transparent"
-        android:textAlignment="textStart"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
 
-    <Button
-        android:id="@+id/adBlockerbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ad Blocker"
-        android:background="@color/transparent"
-        android:textAlignment="textStart"/>
-    <Button
-        android:id="@+id/clearRecordsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Clear Records"
-        android:background="@color/transparent"
-        android:textAlignment="textStart"/>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/browsingSettingsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Browsing Settings "
-        android:background="@color/transparent"
-        android:textAlignment="textStart"/>
-    <Button
-        android:id="@+id/notificationSettingsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:text="Notification Settings"
-        android:textAlignment="textStart"/>
-    <Button
-        android:id="@+id/aboutUsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:text="About US"
-        android:textAlignment="textStart"/>
-    <Button
-        android:id="@+id/changeLanguagebtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:text="Language"
-        android:textAlignment="textStart"/>
-    <Button
-        android:id="@+id/resetToDefaultbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reset to default"
-        />
+        <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/browsingSettingsbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Browsing Settings "
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext"  />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/notificationSettingsbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Notification Settings"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext"  />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/aboutUsbtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="About US"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext"  />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/changeLanguagebtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="Language"
+                android:textColor="@color/black"
+                android:textSize="@dimen/settingstext" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/right" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/resetToDefaultbtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Reset to default"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+    </ScrollView>
 
 </LinearLayout>

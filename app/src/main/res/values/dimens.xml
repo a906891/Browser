@@ -8,4 +8,6 @@
 
     <dimen name="tab_padding">8dp</dimen>
 
+    <dimen name="settingstext">16sp</dimen>
+
 </resources>

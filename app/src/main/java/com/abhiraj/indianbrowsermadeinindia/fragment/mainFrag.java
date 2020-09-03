@@ -240,8 +240,6 @@ public class mainFrag extends baseFrag  {
 
         if(view==null){
             view=inflater.inflate(R.layout.fragment_main, null);
-
-            layout = (LinearLayout)view.findViewById(R.id.hideMe);
             webView = (WebView)view.findViewById(R.id.web_holder);
 
             init(view);
@@ -321,8 +319,8 @@ public class mainFrag extends baseFrag  {
         favAndHisManager = new FavAndHisManager(getActivity().getApplicationContext());
 
         //button setting
-        pagePre.setEnabled(false);
-        pageNext.setEnabled(false);
+        pagePre.setEnabled(true);
+        pageNext.setEnabled(true);
 
         //WebView setting
 //        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
@@ -534,10 +532,7 @@ public class mainFrag extends baseFrag  {
 
     public void ChangeWebViewSize()
     {
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)layout.getLayoutParams();
-        layoutParams.height = 0;
-        layoutParams.width = 0;
-        layout.setLayoutParams(layoutParams);
+
 
         webHolder.setVisibility(View.VISIBLE);
 
@@ -735,7 +730,7 @@ public class mainFrag extends baseFrag  {
             super.onPageFinished(view, url);
             webUrlStr.setText(title);
             webUrlStr.setHint(title);
-            changeStatusOfBottomButton();
+//            changeStatusOfBottomButton();
             //add history
             if (!isPrivateBrowsing) {
                 String date = new SimpleDateFormat("yyyyMMdd", Locale.CHINA).format(new Date()).toString();
@@ -805,11 +800,22 @@ public class mainFrag extends baseFrag  {
                 url = webHolder.getUrl();
                 webHolder.loadUrl(url);
             } else if (view.getId() == R.id.pre_button) {
+
                 if(webHolder.canGoBack())
                     webHolder.goBack();
+                else
+                {
+                    webHolder.setVisibility(View.GONE);
+                }
+
             } else if (view.getId() == R.id.next_button) {
-                if(webHolder.canGoForward())
+
+
+                if(webHolder.canGoForward()) {
+                    webHolder.setVisibility(View.VISIBLE);
                     webHolder.goForward();
+                }
+
             } else if (view.getId() == R.id.home_button) {
                 webHolder.loadUrl("https://www.google.com");
             } else if (view.getId() == R.id.window_button) {
@@ -960,6 +966,7 @@ public class mainFrag extends baseFrag  {
             if (view.getId() == R.id.private_browsing) {
                 //无痕浏览
                 if (isPrivateBrowsing){
+
                     LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
                     View toolsView = toolsInflater.inflate(R.layout.pop_window_tools, null);
                     toolsPopWindow.showAtLocation(toolsView, Gravity.BOTTOM| Gravity.RIGHT, 20, tools.getHeight()+40);
@@ -978,7 +985,6 @@ public class mainFrag extends baseFrag  {
                         privateBrowsing.setScaleX(.5f);
                         privateBrowsing.setScaleY(.6f);
                     }
-
 
                     Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = false;
@@ -1030,7 +1036,6 @@ public class mainFrag extends baseFrag  {
 
             }else if(view.getId() == R.id.themesbtn)
             {
-
                 toolsPopWindow.dismiss();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), Theme.class);
@@ -1090,8 +1095,6 @@ public class mainFrag extends baseFrag  {
                     menuback.setBackgroundColor(Color.WHITE);
                     nightmode = 0;
 //change background according to theme
-
-
 
                     toolsPopWindow.dismiss();
 
@@ -1355,6 +1358,8 @@ public class mainFrag extends baseFrag  {
     }
 
 
+
+
     /*
     * WebChromeClient
     * ProgressBar
@@ -1561,18 +1566,19 @@ public class mainFrag extends baseFrag  {
          * GoBack
          * GoForward
          */
-    public void changeStatusOfBottomButton() {
-        if (webHolder.canGoBack()) {
-            pagePre.setEnabled(true);
-        } else {
-            pagePre.setEnabled(false);
-        }
-        if (webHolder.canGoForward()) {
-            pageNext.setEnabled(true);
-        } else {
-            pageNext.setEnabled(false);
-        }
-    }
+   // to change the status of the back and  forward button
+//    public void changeStatusOfBottomButton() {
+//        if (webHolder.canGoBack()) {
+//            pagePre.setEnabled(true);
+//        } else {
+//            pagePre.setEnabled(false);
+//        }
+//        if (webHolder.canGoForward()) {
+//            pageNext.setEnabled(true);
+//        } else {
+//            pageNext.setEnabled(false);
+//        }
+//    }
 
     //Receive bookmark/historical return processing
     @Override

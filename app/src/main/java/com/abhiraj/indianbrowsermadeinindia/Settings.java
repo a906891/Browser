@@ -5,19 +5,25 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
 
 public class Settings extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
+    private static final int RESULT_DEFAULT = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Button setDefaultBrowserbtn = findViewById(R.id.setDefaultBrowserbtn);
+
+
+
+        TextView setDefaultBrowserbtn = findViewById(R.id.setDefaultBrowserbtn);
         setDefaultBrowserbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,7 +33,7 @@ public class Settings extends AppCompatActivity {
 
 
 
-        Button downloadSettingsbtn = findViewById(R.id.downloadSettingsbtn);
+        TextView downloadSettingsbtn = findViewById(R.id.downloadSettingsbtn);
         downloadSettingsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,7 +42,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button searchSetttingsbtn = findViewById(R.id.searchSetttingsbtn);
+        TextView searchSetttingsbtn = findViewById(R.id.searchSetttingsbtn);
         searchSetttingsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +51,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button adBlockerbtn = findViewById(R.id.adBlockerbtn);
+        TextView adBlockerbtn = findViewById(R.id.adBlockerbtn);
         adBlockerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +60,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button clearRecordsbtn = findViewById(R.id.clearRecordsbtn);
+        TextView clearRecordsbtn = findViewById(R.id.clearRecordsbtn);
         clearRecordsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +69,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button browsingSettingsbtn = findViewById(R.id.browsingSettingsbtn);
+        TextView browsingSettingsbtn = findViewById(R.id.browsingSettingsbtn);
         browsingSettingsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +78,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button notificationSettingsbtn = findViewById(R.id.notificationSettingsbtn);
+        TextView notificationSettingsbtn = findViewById(R.id.notificationSettingsbtn);
         notificationSettingsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +87,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button aboutUsbtn = findViewById(R.id.aboutUsbtn);
+        TextView aboutUsbtn = findViewById(R.id.aboutUsbtn);
         aboutUsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +96,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button changeLanguagebtn = findViewById(R.id.changeLanguagebtn);
+        TextView changeLanguagebtn = findViewById(R.id.changeLanguagebtn);
         changeLanguagebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +105,7 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        Button resetToDefaultbtn = findViewById(R.id.resetToDefaultbtn);
+        TextView resetToDefaultbtn = findViewById(R.id.resetToDefaultbtn);
         resetToDefaultbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,11 +126,13 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-   }
+        setResult(RESULT_DEFAULT);
+
+    }
 
     @Override
     public void onBackPressed() {
-
+        finish();
         super.onBackPressed();
     }
 }
