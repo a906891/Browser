@@ -208,6 +208,7 @@ public class mainFrag extends baseFrag  {
     private int REQUEST_CODE = 11;
     int nightmode = 0;
     int incognito = 0;
+    int donotshowagain = 0;
 
     public mainFrag() {
         this.fragTag = fragConst.new_mainfrag_count + "";
@@ -1609,8 +1610,11 @@ public class mainFrag extends baseFrag  {
         themeNumber = Integer.parseInt(sharedPreferences.getString("number", "0"));
         Log.d("theme", "init: " + themeNumber);
 
+        ///for  exit menu
         SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        nightmode = Integer.parseInt(sharedPreferences1.getString("nightmode", "0"));
+        donotshowagain = Integer.parseInt(sharedPreferences1.getString("show", "0"));
+
+        nightmode = Integer.parseInt(sharedPreferences.getString("nightmode", "0"));
 
         if(nightmode ==1)
         {

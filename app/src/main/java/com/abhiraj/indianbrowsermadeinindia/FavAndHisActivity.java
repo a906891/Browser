@@ -3,6 +3,7 @@ package com.abhiraj.indianbrowsermadeinindia;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +25,10 @@ import com.abhiraj.indianbrowsermadeinindia.other.ItemLongClickedPopWindow;
  */
 
 public class FavAndHisActivity extends Activity {
+    //deleting history if clear history chhecked
+    public static final String SHARED_PREFS = "sharedPrefs";
+    int clearhistory = 0;
+    int ii ;
 
     public static final int RESULT_FAV_HIS = 0;
     private static final int RESULT_DEFAULT = -1;
@@ -66,6 +71,7 @@ public class FavAndHisActivity extends Activity {
 
         //getting values for deleteing the history is checked clear history in exit menu
 
+
         LayoutInflater favAndHisInflater = LayoutInflater.from(getApplicationContext());
         favoriteView = favAndHisInflater.inflate(R.layout.view_favorite, null);
         historyView = favAndHisInflater.inflate(R.layout.view_history, null);
@@ -96,9 +102,29 @@ public class FavAndHisActivity extends Activity {
         //Initialization data
         this.initDataFavorites();
         this.initDataHistory();
+//deleting all history after exit menu
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        clearhistory = Integer.parseInt(sharedPreferences.getString("ClearHistory", "0"));
+
+        if(clearhistory == 1)
+        {
+            Toast.makeText(this, "History clear after exit " + clearhistory, Toast.LENGTH_SHORT).show();
+            favAndHisManager.deleteAllHistories();  //delete history
+            initDataHistory();  //showing empty history
+            historyContent.invalidate();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("ClearHistory", String.valueOf(0));
+            editor.apply();
+        }
+        else
+        {
+            Toast.makeText(this, "Not  deleted " + clearhistory, Toast.LENGTH_SHORT).show();
+        }
 
         //Add default return value
         setResult(RESULT_DEFAULT);
+
+
     }
 
     //Initialize the data in the ListView

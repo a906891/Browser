@@ -289,7 +289,6 @@
             android:id="@+id/resetToDefaultbtn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:paddingTop="50dp"
             android:gravity="center"
             android:text="Reset to default"
             android:textColor="@color/black"

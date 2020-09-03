@@ -84,6 +84,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Donot show with exit menu
+        SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        donotshowagain = Integer.parseInt(sharedPreferences1.getString("show", "0"));
+
+
         for (int i = 0; i < fragConst.init_page_count; i++) {
             mainFrag tmp = new mainFrag();
             fragConst.fraglist.add(tmp);
