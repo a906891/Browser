@@ -49,12 +49,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +65,7 @@ import com.abhiraj.indianbrowsermadeinindia.FavAndHisActivity;
 import com.abhiraj.indianbrowsermadeinindia.Feedback;
 import com.abhiraj.indianbrowsermadeinindia.Incognito;
 import com.abhiraj.indianbrowsermadeinindia.MainActivity;
+import com.abhiraj.indianbrowsermadeinindia.PathUtil;
 import com.abhiraj.indianbrowsermadeinindia.PopupWindowUrl;
 import com.abhiraj.indianbrowsermadeinindia.R;
 import com.abhiraj.indianbrowsermadeinindia.Settings;
@@ -204,6 +207,7 @@ public class mainFrag extends baseFrag {
     WebView webView;
     //for back groundd change
     LinearLayout linear;
+    LinearLayout editback;
     int themeNumber = 6;
     public static final String SHARED_PREFS = "sharedPrefs";
     //for update
@@ -214,6 +218,10 @@ public class mainFrag extends baseFrag {
     //for accessing menu from this
     BottomSheetDialog bottomSheetDialogForIconChange;
     CardView cardView;
+
+    CheckBox ClearHistory;
+    CheckBox doNotShowAgain;
+    Dialog exit;
 
     public mainFrag() {
         this.fragTag = fragConst.new_mainfrag_count + "";
@@ -264,6 +272,8 @@ public class mainFrag extends baseFrag {
     private void init(View view) {
 
         LinearLayout ly = view.findViewById(R.id.mainbackground);
+        editback = view.findViewById(R.id.web_url_layout);
+
         linear = ly;
 /// for changing the background for the first time.
 
@@ -959,6 +969,8 @@ public class mainFrag extends baseFrag {
                 //无痕浏览
                 if (isPrivateBrowsing) {
 
+
+                    bottomSheetDialogForIconChange.dismiss();
                     if (nightmode == 1) {
                         ImageView privateBrowsing = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn);
                         privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
@@ -977,6 +989,7 @@ public class mainFrag extends baseFrag {
                     changebackground();
 
                 } else {
+                    bottomSheetDialogForIconChange.dismiss();
                     ////changing the icon of the incognito mode
                     ImageView privateBrowsing = bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn);
 
@@ -1028,6 +1041,10 @@ public class mainFrag extends baseFrag {
                     editor.apply();
                     //change background black
                     linear.setBackgroundResource(R.drawable.nightmodeon);
+
+                    editback.setBackgroundColor(Color.DKGRAY);
+
+
                     ImageView privateBrowsing = (ImageView) bottomSheetDialogForIconChange.findViewById(R.id.incognitobtn);
 
                     privateBrowsing.setBackgroundResource(R.drawable.nightincognitooff);
@@ -1055,6 +1072,9 @@ public class mainFrag extends baseFrag {
                     add_favorite_button.setScaleY(.6f);
 
                 } else {
+
+                    editback.setBackgroundColor(Color.WHITE);
+
                     //CHANGE MENU BACKGROUND
                     nightmode = 0;
 //change background according to theme
@@ -1097,7 +1117,36 @@ public class mainFrag extends baseFrag {
                 intent.setClass(getActivity(), DownloaderNew.class);
                 intent.putExtra("type", "download");
                 startActivityForResult(intent, MainActivity.REQUEST_OPEN_DOWNLOADS);
+            } else if (view.getId() == R.id.menudownbtn) {
+                bottomSheetDialogForIconChange.dismiss();
+
+            } else if (view.getId() == R.id.exitbtn) {
+                bottomSheetDialogForIconChange.dismiss();
+                if (donotshowagain == 0) {
+                    Dialog bottomSheetDialog = new Dialog(
+                            getContext(), R.style.BottomSheetDialoTheme);
+                    //Making a view of Menu to be transparent from the background for Curved corners
+                    View bottomSheetView = LayoutInflater.from(getContext())
+                            .inflate(R.layout.activity_exit, (LinearLayout) bottomSheetDialog.findViewById(R.id.BottomSheetContainer1));
+
+                    bottomSheetDialog.setContentView(bottomSheetView);
+                    bottomSheetDialog.show();
+
+                    bottomSheetDialog.findViewById(R.id.exitconfirmbtn).setOnClickListener(toolsClickedListener);
+                    bottomSheetDialog.findViewById(R.id.cancelconfirmbtn).setOnClickListener(toolsClickedListener);
+
+                    bottomSheetDialog.findViewById(R.id.clearHistory).setOnClickListener(toolsClickedListener);
+                    ClearHistory = bottomSheetDialog.findViewById(R.id.clearHistory);
+
+                    bottomSheetDialog.findViewById(R.id.doNotShowAgain).setOnClickListener(toolsClickedListener);
+                    doNotShowAgain = bottomSheetDialog.findViewById(R.id.doNotShowAgain);
+                } else {
+
+                    System.exit(0);
+                }
+
             }
+
             //To take screen shot of the web page
 //            else if (view.getId() == R.id.window_screenshot) {
 //                //网页截图或全屏截图
@@ -1192,7 +1241,68 @@ public class mainFrag extends baseFrag {
 //                intent.setClass(getActivity(), PaintActivity.class);
 //                startActivity(intent);
 //            }
+////////////////////////////////******************** For Exit Menu DialogBBox
+            switch (view.getId()) {
+                case R.id.exitconfirmbtn:
+                    if (ClearHistory.isChecked()) {
+                        Toast.makeText(getActivity(), "History Delete on", Toast.LENGTH_SHORT).show();
+                        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("ClearHistroy", String.valueOf(1));
+                        editor.apply();
+                    } else {
+                        Toast.makeText(getActivity(), "History delete off", Toast.LENGTH_SHORT).show();
+                        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("ClearHistroy", String.valueOf(0));
+                        editor.apply();
+                    }
+//exit dialog box
+                    exit.dismiss();
+//exit application
+                    System.exit(0);
+                    break;
+                case R.id.clearHistory:
+                    if (ClearHistory.isChecked()) {
+                        final SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                        editor1.putString("ClearHistory", String.valueOf(1));
+                        editor1.apply();
+                        Toast.makeText(getActivity(), "clear history", Toast.LENGTH_SHORT).show();
+
+
+                    } else if (!ClearHistory.isChecked()) {
+                        final SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                        editor1.putString("ClearHistory", String.valueOf(0));
+                        editor1.apply();
+                        Toast.makeText(getActivity(), "no clear history", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.doNotShowAgain:
+                    if (doNotShowAgain.isChecked()) {
+                        final SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                        editor1.putString("show", String.valueOf(1));
+                        editor1.apply();
+                        Toast.makeText(getActivity(), "do not show again", Toast.LENGTH_SHORT).show();
+
+                    } else if (!doNotShowAgain.isChecked()) {
+                        final SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                        editor1.putString("show", String.valueOf(0));
+                        editor1.apply();
+                        Toast.makeText(getActivity(), "show again", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.cancelconfirmbtn:
+                    exit.dismiss();
+                    break;
+
+            }
         }
+
+
     }
 
     private void changenightmodeicon(int nightmode) {
@@ -1565,6 +1675,8 @@ public class mainFrag extends baseFrag {
 
         if (nightmode == 1) {
             linear.setBackgroundResource(R.drawable.nightmodeon);
+            editback.setBackgroundColor(Color.DKGRAY);
+
         } else {
 
             switch (themeNumber) {

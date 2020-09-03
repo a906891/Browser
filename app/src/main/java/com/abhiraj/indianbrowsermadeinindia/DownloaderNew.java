@@ -9,8 +9,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -28,6 +30,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -45,14 +48,31 @@ public class DownloaderNew extends AppCompatActivity implements ItemClickListene
     DownloadAdapaterNew downloadAdapater;
     List<DownloadModelNew> downloadModels = new ArrayList<>();
     Realm realm;
-    String urlsss = "",filename="";
+    String urlsss = "", filename = "";
 
     private static final int RESULT_DEFAULT = -1;
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    int nightmode = 0;
+    LinearLayout back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_downloader_new);
+
+
+        back = findViewById(R.id.backgroundownload);
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        nightmode = Integer.parseInt(sharedPreferences.getString("nightmode", "0"));
+
+        if (nightmode == 1) {
+            back.setBackgroundColor(Color.GRAY);
+        } else {
+            back.setBackgroundColor(Color.WHITE);
+        }
 
         urlsss = getIntent().getStringExtra("urlsss");
         filename = getIntent().getStringExtra("filenames");

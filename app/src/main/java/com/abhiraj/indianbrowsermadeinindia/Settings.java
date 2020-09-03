@@ -2,17 +2,23 @@ package com.abhiraj.indianbrowsermadeinindia;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
 
+
 public class Settings extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
+    int nightmode = 0;
+    LinearLayout back;
+
     private static final int RESULT_DEFAULT = -1;
 
     @Override
@@ -20,8 +26,17 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        back = findViewById(R.id.background);
 
 
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        nightmode = Integer.parseInt(sharedPreferences.getString("nightmode", "0"));
+
+        if (nightmode == 1) {
+            back.setBackgroundColor(Color.GRAY);
+        } else {
+            back.setBackgroundColor(Color.WHITE);
+        }
 
         TextView setDefaultBrowserbtn = findViewById(R.id.setDefaultBrowserbtn);
         setDefaultBrowserbtn.setOnClickListener(new View.OnClickListener() {

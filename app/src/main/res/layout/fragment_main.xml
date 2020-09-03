@@ -19,7 +19,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <LinearLayout
-
                 android:id="@+id/web_url_layout"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
@@ -32,7 +31,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="0.9"
                     android:layout_margin="8dp"
-                    android:hint="@string/homepage"
+                    android:hint="Search or Enter URL"
                     android:textSize="15dp"
                     android:paddingLeft="5dp"
                     android:focusable="true"

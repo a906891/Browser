@@ -337,7 +337,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     MainActivity.this, R.style.BottomSheetDialoTheme);
             //Making a view of Menu to be transparent from the background for Curved corners
             View bottomSheetView = LayoutInflater.from(getApplicationContext())
-                    .inflate(R.layout.activity_exit, (LinearLayout) findViewById(R.id.BottomSheetContainer));
+                    .inflate(R.layout.activity_exit, (LinearLayout) findViewById(R.id.BottomSheetContainer1));
 
             bottomSheetDialog.setContentView(bottomSheetView);
             exit = bottomSheetDialog;
