@@ -359,7 +359,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:padding="7dp"
-                android:src="@drawable/setting"/>
+                />
 
             <TextView
                 android:layout_width="0dp"
@@ -372,7 +372,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:padding="7dp"
-                android:src="@drawable/downarrow"/>
+                />
 
             <TextView
                 android:layout_width="0dp"
@@ -385,7 +385,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:padding="7dp"
-                android:src="@drawable/powera"/>
+                />
 
 
         </LinearLayout>

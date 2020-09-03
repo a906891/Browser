@@ -266,7 +266,6 @@ public class mainFrag extends baseFrag  {
         changebackground();
 
 
-
         Log.d("theme", "init: " + themeNumber);
 
         mainLayout = (LinearLayout) view.findViewById(R.id.main_lt);
@@ -862,6 +861,20 @@ public class mainFrag extends baseFrag  {
 
                 if(nightmode == 1)
                 {
+
+                    settingsbtn.setBackgroundResource(R.drawable.nightsetting);
+                    settingsbtn.setScaleX(.3f);
+                    settingsbtn.setScaleY(.6f);
+
+
+                    menudownbtn.setBackgroundResource(R.drawable.nightdownarrow);
+                    menudownbtn.setScaleX(.3f);
+                    menudownbtn.setScaleY(.6f);
+
+
+                    exitbtn.setBackgroundResource(R.drawable.nightpowera);
+                    exitbtn.setScaleX(.3f);
+                    exitbtn.setScaleY(.6f);
                     //change background black
                     if(incognito == 0)
                     {
@@ -896,7 +909,17 @@ public class mainFrag extends baseFrag  {
                 }
                 else
                 {
+                    settingsbtn.setBackgroundResource(R.drawable.settings);
+                    settingsbtn.setScaleX(.3f);
+                    settingsbtn.setScaleY(.6f);
 
+                    menudownbtn.setBackgroundResource(R.drawable.downarrow);
+                    menudownbtn.setScaleX(.3f);
+                    menudownbtn.setScaleY(.6f);
+
+                    exitbtn.setBackgroundResource(R.drawable.powera);
+                    exitbtn.setScaleX(.3f);
+                    exitbtn.setScaleY(.6f);
                     //change background black
                     if(incognito == 0)
                     {
@@ -950,6 +973,8 @@ public class mainFrag extends baseFrag  {
                     Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = false;
 
+                    changebackground();
+
                     incognito = 0 ;
                 } else {
                     LayoutInflater toolsInflater = LayoutInflater.from(getActivity().getApplicationContext());
@@ -963,6 +988,7 @@ public class mainFrag extends baseFrag  {
 
                     Toast.makeText(getActivity(), "Incognito Mode On", Toast.LENGTH_SHORT).show();
                     isPrivateBrowsing = true;
+                    linear.setBackgroundResource(R.drawable.incognitoback);
                     incognito = 1;
                 }
 
@@ -1039,29 +1065,15 @@ public class mainFrag extends baseFrag  {
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
 
-                    ImageView settingsbtn = (ImageView) toolsPopWindow.getView(R.id.settingsbtn);
-                    settingsbtn.setBackgroundResource(R.drawable.nightsetting);
-                    settingsbtn.setScaleX(.5f);
-                    settingsbtn.setScaleY(.6f);
-
-                    ImageView menudownbtn = (ImageView) toolsPopWindow.getView(R.id.menudownbtn);
-                    menudownbtn.setBackgroundResource(R.drawable.nightdownarrow);
-                    menudownbtn.setScaleX(.5f);
-                    menudownbtn.setScaleY(.6f);
-
-                    ImageView exitbtn = (ImageView) toolsPopWindow.getView(R.id.exitbtn);
-                    exitbtn.setBackgroundResource(R.drawable.nightpowera);
-                    exitbtn.setScaleX(.5f);
-                    exitbtn.setScaleY(.6f);
-
                 }
                 else
                 {
                     //CHANGE MENU BACKGROUND
                     LinearLayout menuback = (LinearLayout) toolsPopWindow.getView(R.id.menuback);
                     menuback.setBackgroundColor(Color.WHITE);
+//change background according to theme
+                    changebackground();
 
-                    linear.setBackgroundResource(R.drawable.back1);
 
                     toolsPopWindow.dismiss();
                     nightmode = 0;
@@ -1092,20 +1104,6 @@ public class mainFrag extends baseFrag  {
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
 
-                    ImageView settingsbtn = (ImageView) toolsPopWindow.getView(R.id.settingsbtn);
-                    settingsbtn.setBackgroundResource(R.drawable.settings);
-                    settingsbtn.setScaleX(.5f);
-                    settingsbtn.setScaleY(.6f);
-
-                    ImageView menudownbtn = (ImageView) toolsPopWindow.getView(R.id.menudownbtn);
-                    menudownbtn.setBackgroundResource(R.drawable.downarrow);
-                    menudownbtn.setScaleX(.5f);
-                    menudownbtn.setScaleY(.6f);
-
-                    ImageView exitbtn = (ImageView) toolsPopWindow.getView(R.id.exitbtn);
-                    exitbtn.setBackgroundResource(R.drawable.powera);
-                    exitbtn.setScaleX(.5f);
-                    exitbtn.setScaleY(.6f);
                 }
 
 
@@ -1587,26 +1585,39 @@ public class mainFrag extends baseFrag  {
         themeNumber = Integer.parseInt(sharedPreferences.getString("number", "0"));
         Log.d("theme", "init: " + themeNumber);
 
-        switch (themeNumber) {
-            case 1:
-                linear.setBackgroundResource(R.drawable.back1);
-                break;
-            case 2:
-                linear.setBackgroundResource(R.drawable.back2);
-                break;
-            case 3:
-                linear.setBackgroundResource(R.drawable.back3);
-                break;
-            case 4:
-                linear.setBackgroundResource(R.drawable.back4);
-                break;
-            case 5:
-                linear.setBackgroundResource(R.drawable.back5);
-                break;
-            case 6:
-                linear.setBackgroundResource(R.drawable.back6);
-                break;
+        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        nightmode = Integer.parseInt(sharedPreferences1.getString("nightmode", "0"));
+
+        if(nightmode ==1)
+        {
+            linear.setBackgroundResource(R.drawable.nightmodeon);
         }
+        else
+        {
+            switch (themeNumber) {
+                case 1:
+                    linear.setBackgroundResource(R.drawable.back1);
+                    break;
+                case 2:
+                    linear.setBackgroundResource(R.drawable.back2);
+                    break;
+                case 3:
+                    linear.setBackgroundResource(R.drawable.back3);
+                    break;
+                case 4:
+                    linear.setBackgroundResource(R.drawable.back4);
+                    break;
+                case 5:
+                    linear.setBackgroundResource(R.drawable.back5);
+                    break;
+                case 6:
+                    linear.setBackgroundResource(R.drawable.back6);
+                    break;
+            }
+        }
+
+
+
     }
 
     //获取存储权限
