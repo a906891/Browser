@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Incognito"
-    android:background="#000">
+    >
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:lottie_autoPlay="true"
-        app:lottie_fileName=".json"
+        app:lottie_fileName="protect.json"
         app:lottie_loop="false" />
 
 </LinearLayout>

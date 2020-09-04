@@ -993,9 +993,9 @@ public class mainFrag extends baseFrag {
                     changebackground();
 
                     Intent intent = new Intent();
-                    intent.setClass(getActivity(), Incognito.class);
-                    intent.putExtra("type", "incognito ");
-                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOON);
+                    intent.setClass(getActivity(), Incognitooff.class);
+                    intent.putExtra("type", "incognitoff");
+                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOOFF);
 
 
                 } else {
@@ -1013,9 +1013,10 @@ public class mainFrag extends baseFrag {
                     incognito = 1;
 
                     Intent intent = new Intent();
-                    intent.setClass(getActivity(), Incognitooff.class);
-                    intent.putExtra("type", "incognitoff");
-                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOOFF);
+                    intent.setClass(getActivity(), Incognito.class);
+                    intent.putExtra("type", "incognito ");
+                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOON);
+
 
                 }
 
