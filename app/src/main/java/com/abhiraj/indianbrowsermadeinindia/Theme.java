@@ -113,7 +113,7 @@ public class Theme extends Activity implements View.OnClickListener {
         editor.putString("number", String.valueOf(number));
         editor.apply();
 
-        Toast.makeText(this, "Number is saved " + number, Toast.LENGTH_SHORT).show();
+
         finish();   //ultra high level code
 //        startActivity(new Intent  (Theme.this,OriginalMainActivity.class));
     }

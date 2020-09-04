@@ -137,7 +137,6 @@ public class Settings extends AppCompatActivity {
                 editor.putString("ClearHistroy", String.valueOf(0));
                 editor.apply();
 
-                Toast.makeText(Settings.this, "Reset to Default", Toast.LENGTH_SHORT).show();
                 Toast.makeText(Settings.this, "Restart App To Reset", Toast.LENGTH_SHORT).show();
 
             }

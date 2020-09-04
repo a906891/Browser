@@ -366,13 +366,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         switch (view.getId()) {
             case R.id.exitconfirmbtn:
                 if (ClearHistory.isChecked()) {
-                    Toast.makeText(this, "History Delete on", Toast.LENGTH_SHORT).show();
+
                     final SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("ClearHistroy", String.valueOf(1));
                     editor.apply();
                 } else {
-                    Toast.makeText(this, "History delete off", Toast.LENGTH_SHORT).show();
+
                     final SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("ClearHistroy", String.valueOf(0));
@@ -390,7 +390,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                     editor1.putString("ClearHistory", String.valueOf(1));
                     editor1.apply();
-                    Toast.makeText(this, "clear history", Toast.LENGTH_SHORT).show();
 
 
                 } else if (!ClearHistory.isChecked()) {
@@ -398,7 +397,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                     editor1.putString("ClearHistory", String.valueOf(0));
                     editor1.apply();
-                    Toast.makeText(this, "no clear history", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
             case R.id.doNotShowAgain:
@@ -407,14 +406,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                     editor1.putString("show", String.valueOf(1));
                     editor1.apply();
-                    Toast.makeText(this, "do not show again", Toast.LENGTH_SHORT).show();
 
                 } else if (!doNotShowAgain.isChecked()) {
                     final SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                     SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                     editor1.putString("show", String.valueOf(0));
                     editor1.apply();
-                    Toast.makeText(this, "show again", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
             case R.id.cancelconfirmbtn:

@@ -48,7 +48,7 @@ public class PopupWindowUrl extends PopupWindow {
             public void onClick(View view) {
                 clipboardManager = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboardManager.setPrimaryClip(ClipData.newPlainText(null, url));
-                Toast.makeText(context, "网址复制成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "URL copied successfully", Toast.LENGTH_SHORT).show();
                 PopupWindowUrl.this.dismiss();
             }
         });

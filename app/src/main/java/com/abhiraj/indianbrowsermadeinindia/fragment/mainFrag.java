@@ -987,7 +987,7 @@ public class mainFrag extends baseFrag {
                         privateBrowsing.setScaleY(.6f);
                     }
 
-                    Toast.makeText(getActivity(), "Incognito Mode Off", Toast.LENGTH_SHORT).show();
+
                     isPrivateBrowsing = false;
                     incognito = 0;
                     changebackground();
@@ -1007,7 +1007,7 @@ public class mainFrag extends baseFrag {
                     privateBrowsing.setScaleX(.5f);
                     privateBrowsing.setScaleY(.6f);
 
-                    Toast.makeText(getActivity(), "Incognito Mode On", Toast.LENGTH_SHORT).show();
+
                     isPrivateBrowsing = true;
                     linear.setBackgroundResource(R.drawable.incognitoback);
                     incognito = 1;
@@ -1039,7 +1039,7 @@ public class mainFrag extends baseFrag {
                 //添加书签
                 favAndHisManager.addFavorite(title, url);
                 favAndHisManager.getAllFavorites();
-                Toast.makeText(getActivity(), "Page saved", Toast.LENGTH_SHORT).show();
+
             } else if (view.getId() == R.id.showbookmarksbtn) {
                 //View and edit bookmarks
                 bottomSheetDialogForIconChange.dismiss();
@@ -1289,13 +1289,12 @@ public class mainFrag extends baseFrag {
             switch (view.getId()) {
                 case R.id.exitconfirmbtn:
                     if (ClearHistory.isChecked()) {
-                        Toast.makeText(getActivity(), "History Delete on", Toast.LENGTH_SHORT).show();
                         final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("ClearHistroy", String.valueOf(1));
                         editor.apply();
                     } else {
-                        Toast.makeText(getActivity(), "History delete off", Toast.LENGTH_SHORT).show();
+
                         final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("ClearHistroy", String.valueOf(0));
@@ -1312,7 +1311,6 @@ public class mainFrag extends baseFrag {
                         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                         editor1.putString("ClearHistory", String.valueOf(1));
                         editor1.apply();
-                        Toast.makeText(getActivity(), "clear history", Toast.LENGTH_SHORT).show();
 
 
                     } else if (!ClearHistory.isChecked()) {
@@ -1320,7 +1318,7 @@ public class mainFrag extends baseFrag {
                         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                         editor1.putString("ClearHistory", String.valueOf(0));
                         editor1.apply();
-                        Toast.makeText(getActivity(), "no clear history", Toast.LENGTH_SHORT).show();
+
                     }
                     break;
                 case R.id.doNotShowAgain:
@@ -1329,14 +1327,14 @@ public class mainFrag extends baseFrag {
                         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                         editor1.putString("show", String.valueOf(1));
                         editor1.apply();
-                        Toast.makeText(getActivity(), "do not show again", Toast.LENGTH_SHORT).show();
+
 
                     } else if (!doNotShowAgain.isChecked()) {
                         final SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                         editor1.putString("show", String.valueOf(0));
                         editor1.apply();
-                        Toast.makeText(getActivity(), "show again", Toast.LENGTH_SHORT).show();
+
                     }
                     break;
                 case R.id.cancelconfirmbtn:
@@ -1440,7 +1438,7 @@ public class mainFrag extends baseFrag {
             } else if (v.getId() == R.id.item_longclicked_copyAchor) {
                 clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboardManager.setPrimaryClip(ClipData.newPlainText(null, url));
-                Toast.makeText(getActivity(), "URL copied", Toast.LENGTH_SHORT).show();
+
             }
         }
     }

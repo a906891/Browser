@@ -390,7 +390,6 @@ public class DownloaderNew extends AppCompatActivity implements ItemClickListene
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Back and back", Toast.LENGTH_SHORT).show();
         finish();
     }
 
