@@ -1742,6 +1742,31 @@ public class mainFrag extends baseFrag {
                 case 6:
                     linear.setBackgroundResource(R.drawable.back6);
                     break;
+                case 7:
+                    linear.setBackgroundResource(R.drawable.back7);
+                    break;
+                case 8:
+                    linear.setBackgroundResource(R.drawable.back8);
+                    break;
+                case 9:
+                    linear.setBackgroundResource(R.drawable.back9);
+                    break;
+                case 10:
+                    linear.setBackgroundResource(R.drawable.back10);
+                    break;
+                case 11:
+                    linear.setBackgroundResource(R.drawable.back11);
+                    break;
+                case 12:
+                    linear.setBackgroundResource(R.drawable.back12);
+                    break;
+                case 13:
+                    linear.setBackgroundResource(R.drawable.back13);
+                    break;
+                case 14:
+                    linear.setBackgroundResource(R.drawable.back14);
+                    break;
+
             }
         }
 

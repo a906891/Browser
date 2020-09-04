@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Theme"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Theme">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,54 +13,54 @@
         android:orientation="vertical">
 
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="350dp"
-       android:layout_marginBottom="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginBottom="20dp">
 
 
-         <Button
-             android:id="@+id/thm1"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:layout_height="wrap_content"
-             android:background="@drawable/back1"
-             android:layout_marginRight="10dp"/>
+            <Button
+                android:id="@+id/thm1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/back1" />
 
-         <Button
-             android:id="@+id/thm2"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:layout_height="wrap_content"
-             android:background="@drawable/back2"/>/>
-
-
-   </LinearLayout>
+            <Button
+                android:id="@+id/thm2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/back2" />/>
 
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="350dp"
-       android:layout_marginBottom="20dp">>
+        </LinearLayout>
 
-      <Button
-          android:id="@+id/thm3"
 
-          android:layout_width="0dp"
-          android:layout_weight="1"
-          android:layout_height="match_parent"
-          android:background="@drawable/back3"
-          android:layout_marginRight="10dp"/>/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginBottom="20dp">>
 
-      <Button
-          android:id="@+id/thm4"
+            <Button
+                android:id="@+id/thm3"
 
-          android:layout_width="0dp"
-          android:layout_weight="1"
-          android:layout_height="match_parent"
-          android:background="@drawable/back4"/>/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/back3" />/>
 
-   </LinearLayout>
+            <Button
+                android:id="@+id/thm4"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/back4" />/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,19 +72,118 @@
                 android:id="@+id/thm5"
 
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:background="@drawable/back5"
-                android:layout_marginRight="10dp"/>/>
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/back5" />/>
 
             <Button
                 android:id="@+id/thm6"
 
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:background="@drawable/back6"/>/>
+                android:layout_weight="1"
+                android:background="@drawable/back6" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginBottom="20dp">
+
+
+            <Button
+                android:id="@+id/thm7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/back7" />
+
+            <Button
+                android:id="@+id/thm8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/back8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginBottom="20dp">
+
+
+            <Button
+                android:id="@+id/thm9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/back9" />
+
+            <Button
+                android:id="@+id/thm10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/back10" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginBottom="20dp">
+
+
+            <Button
+                android:id="@+id/thm11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/back11" />
+
+            <Button
+                android:id="@+id/thm12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/back12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginBottom="20dp">
+
+
+            <Button
+                android:id="@+id/thm13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/back13" />
+
+            <Button
+                android:id="@+id/thm14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/back14" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
 </ScrollView>
+
+
+
+

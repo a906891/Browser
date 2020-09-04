@@ -36,6 +36,23 @@ public class Theme extends Activity implements View.OnClickListener {
         thm5.setOnClickListener(this);
         Button thm6 = findViewById(R.id.thm6);
         thm6.setOnClickListener(this);
+        Button thm7 = findViewById(R.id.thm7);
+        thm6.setOnClickListener(this);
+        Button thm8 = findViewById(R.id.thm8);
+        thm6.setOnClickListener(this);
+        Button thm9 = findViewById(R.id.thm9);
+        thm6.setOnClickListener(this);
+        Button thm10 = findViewById(R.id.thm10);
+        thm6.setOnClickListener(this);
+        Button thm11 = findViewById(R.id.thm11);
+        thm6.setOnClickListener(this);
+        Button thm12 = findViewById(R.id.thm12);
+        thm6.setOnClickListener(this);
+        Button thm13 = findViewById(R.id.thm13);
+        thm6.setOnClickListener(this);
+        Button thm14 = findViewById(R.id.thm14);
+        thm6.setOnClickListener(this);
+
 
         setResult(RESULT_DEFAULT);
     }
@@ -62,6 +79,30 @@ public class Theme extends Activity implements View.OnClickListener {
                 break;
             case R.id.thm6:
                 sendTheme(6);
+                break;
+            case R.id.thm7:
+                sendTheme(7);
+                break;
+            case R.id.thm8:
+                sendTheme(8);
+                break;
+            case R.id.thm9:
+                sendTheme(9);
+                break;
+            case R.id.thm10:
+                sendTheme(10);
+                break;
+            case R.id.thm11:
+                sendTheme(11);
+                break;
+            case R.id.thm12:
+                sendTheme(12);
+                break;
+            case R.id.thm13:
+                sendTheme(13);
+                break;
+            case R.id.thm14:
+                sendTheme(14);
                 break;
         }
     }
