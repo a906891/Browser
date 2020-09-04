@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="protect.json"
-        app:lottie_loop="false" />
+        app:lottie_loop="false"
+        tools:ignore="MissingClass" />
 
 </LinearLayout>
