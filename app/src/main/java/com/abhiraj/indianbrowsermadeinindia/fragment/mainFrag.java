@@ -64,7 +64,10 @@ import com.abhiraj.indianbrowsermadeinindia.DownloaderNew;
 import com.abhiraj.indianbrowsermadeinindia.FavAndHisActivity;
 import com.abhiraj.indianbrowsermadeinindia.Feedback;
 import com.abhiraj.indianbrowsermadeinindia.Incognito;
+import com.abhiraj.indianbrowsermadeinindia.Incognitooff;
 import com.abhiraj.indianbrowsermadeinindia.MainActivity;
+import com.abhiraj.indianbrowsermadeinindia.NighhtModeOff;
+import com.abhiraj.indianbrowsermadeinindia.NightModeOn;
 import com.abhiraj.indianbrowsermadeinindia.PathUtil;
 import com.abhiraj.indianbrowsermadeinindia.PopupWindowUrl;
 import com.abhiraj.indianbrowsermadeinindia.R;
@@ -989,6 +992,12 @@ public class mainFrag extends baseFrag {
                     incognito = 0;
                     changebackground();
 
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), Incognito.class);
+                    intent.putExtra("type", "incognito ");
+                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOON);
+
+
                 } else {
                     bottomSheetDialogForIconChange.dismiss();
                     ////changing the icon of the incognito mode
@@ -1002,6 +1011,12 @@ public class mainFrag extends baseFrag {
                     isPrivateBrowsing = true;
                     linear.setBackgroundResource(R.drawable.incognitoback);
                     incognito = 1;
+
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), Incognitooff.class);
+                    intent.putExtra("type", "incognitoff");
+                    startActivityForResult(intent, MainActivity.REQUEST_OPEN_INCOGNITOOFF);
+
                 }
 
             } else if (view.getId() == R.id.addbookmarkbtn) {
@@ -1087,6 +1102,12 @@ public class mainFrag extends baseFrag {
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
 
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), NightModeOn.class);
+                    intent.putExtra("type", "nightmodeon");
+                    startActivityForResult(intent, MainActivity.REQUEST_NIGHT_MODE_ON);
+
+
                 } else {
 
                     editback.setBackgroundColor(Color.WHITE);
@@ -1123,6 +1144,12 @@ public class mainFrag extends baseFrag {
                     add_favorite_button.setBackgroundResource(R.drawable.star);
                     add_favorite_button.setScaleX(.5f);
                     add_favorite_button.setScaleY(.6f);
+
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), NighhtModeOff.class);
+                    intent.putExtra("type", "nightmodeoff");
+                    startActivityForResult(intent, MainActivity.REQUEST_NIGHT_MODE_OFF);
+
 
                 }
 
