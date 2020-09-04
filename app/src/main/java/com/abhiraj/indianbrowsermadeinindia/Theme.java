@@ -37,21 +37,21 @@ public class Theme extends Activity implements View.OnClickListener {
         Button thm6 = findViewById(R.id.thm6);
         thm6.setOnClickListener(this);
         Button thm7 = findViewById(R.id.thm7);
-        thm6.setOnClickListener(this);
+        thm7.setOnClickListener(this);
         Button thm8 = findViewById(R.id.thm8);
-        thm6.setOnClickListener(this);
+        thm8.setOnClickListener(this);
         Button thm9 = findViewById(R.id.thm9);
-        thm6.setOnClickListener(this);
+        thm9.setOnClickListener(this);
         Button thm10 = findViewById(R.id.thm10);
-        thm6.setOnClickListener(this);
+        thm10.setOnClickListener(this);
         Button thm11 = findViewById(R.id.thm11);
-        thm6.setOnClickListener(this);
+        thm11.setOnClickListener(this);
         Button thm12 = findViewById(R.id.thm12);
-        thm6.setOnClickListener(this);
+        thm12.setOnClickListener(this);
         Button thm13 = findViewById(R.id.thm13);
-        thm6.setOnClickListener(this);
+        thm13.setOnClickListener(this);
         Button thm14 = findViewById(R.id.thm14);
-        thm6.setOnClickListener(this);
+        thm14.setOnClickListener(this);
 
 
         setResult(RESULT_DEFAULT);
