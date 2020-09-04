@@ -70,6 +70,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public static final int REQUEST_OPEN_SETTINGS = 0; //for openning settings
     public static final int REQUEST_OPEN_FEEDBACK = 0; //for openning feedback
     public static final int REQUEST_OPEN_THEMES = 0; //for openning themes
+    public static final int REQUEST_NIGHT_MODE_OFF = 0; //
 
     public static final int REQUEST_OPEN_INCOGNITOOFF = 0; //for openning themes
 
