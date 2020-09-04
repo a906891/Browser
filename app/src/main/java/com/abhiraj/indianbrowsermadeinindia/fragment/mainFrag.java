@@ -17,6 +17,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -1266,10 +1267,17 @@ public class mainFrag extends baseFrag {
                 bottomSheetDialogForIconChange.dismiss();
             } else if (view.getId() == R.id.feedbackbtn) {
                 bottomSheetDialogForIconChange.dismiss();
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), Feedback.class);
-                intent.putExtra("type", "feedback");
-                startActivityForResult(intent, MainActivity.REQUEST_OPEN_FEEDBACK);
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "a906891@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Enter Your Feedback We Will Contact You ");
+                getContext().startActivity(Intent.createChooser(emailIntent, null));
+
+//
+//                Intent intent = new Intent();
+//                intent.setClass(getActivity(), Feedback.class);
+//                intent.putExtra("type", "feedback");
+//                startActivityForResult(intent, MainActivity.REQUEST_OPEN_FEEDBACK);
             }
 
 //            else if (view.getId() == R.id.page_edit) {
