@@ -1175,6 +1175,7 @@ public class mainFrag extends baseFrag {
                             .inflate(R.layout.activity_exit, (LinearLayout) bottomSheetDialog.findViewById(R.id.BottomSheetContainer1));
 
                     bottomSheetDialog.setContentView(bottomSheetView);
+                    exit = bottomSheetDialog;
                     bottomSheetDialog.show();
 
                     bottomSheetDialog.findViewById(R.id.exitconfirmbtn).setOnClickListener(toolsClickedListener);
@@ -1185,6 +1186,8 @@ public class mainFrag extends baseFrag {
 
                     bottomSheetDialog.findViewById(R.id.doNotShowAgain).setOnClickListener(toolsClickedListener);
                     doNotShowAgain = bottomSheetDialog.findViewById(R.id.doNotShowAgain);
+
+
                 } else {
 
                     System.exit(0);
