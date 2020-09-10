@@ -9,8 +9,8 @@ android {
         applicationId "com.abhiraj.indianbrowsermadeinindia"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 5
-        versionName "1.2"
+        versionCode 7
+        versionName "1.4"
     }
     buildTypes {
         release {

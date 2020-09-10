@@ -212,7 +212,7 @@ public class mainFrag extends baseFrag {
     //for back groundd change
     LinearLayout linear;
     LinearLayout editback;
-    int themeNumber = 6;
+    int themeNumber = 2;
     public static final String SHARED_PREFS = "sharedPrefs";
     //for update
     private int REQUEST_CODE = 11;
