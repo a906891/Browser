@@ -309,35 +309,36 @@
                             android:textSize="@dimen/original_text_size" />
                     </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:orientation="vertical">-->
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/Opengames"
-                                android:textSize="20sp"
-                                android:fontFamily="@font/kumbhsansregular"
-                                android:textColor="@color/black"
-                                android:textAlignment="center"
-                                android:layout_marginTop="50dp"/>
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/Opengames"-->
+<!--                                android:textSize="20sp"-->
+<!--                                android:fontFamily="@font/kumbhsansregular"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:layout_marginTop="50dp"/>-->
 
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/downfinger"/>
+<!--                            <ImageView-->
+<!--                                android:layout_width="50dp"-->
+<!--                                android:layout_height="50dp"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:src="@drawable/downfinger"/>-->
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/gameswin2"/>
+<!--                            <ImageView-->
+<!--                                android:id="@+id/opengames2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:src="@drawable/gameswin2"/>-->
 
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
                     </LinearLayout>
 

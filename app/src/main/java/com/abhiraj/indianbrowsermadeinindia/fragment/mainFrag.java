@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.test.espresso.core.deps.guava.eventbus.Subscribe;
 import android.support.v4.app.ActivityCompat;
@@ -127,6 +128,8 @@ public class mainFrag extends baseFrag {
     private ImageView youtubebtn;
     private ImageView githubbtn;
     private ImageView coronabtn;
+
+    private ImageView opengames;
 
     private LinearLayout mainLayout;
     private FrameLayout rootLayout;
@@ -403,6 +406,8 @@ public class mainFrag extends baseFrag {
 
         isNewFragment = false;
 
+
+
         gbtn = view.findViewById(R.id.google_btn);
         gbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -413,6 +418,22 @@ public class mainFrag extends baseFrag {
 
             }
         });
+
+//        opengames = view.findViewById(R.id.opengames2);
+//        opengames.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Use a CustomTabsIntent.Builder to configure CustomTabsIntent.
+//                String url = "https://135.win.qureka.com/";
+//                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+//// set toolbar color and/or setting custom actions before invoking build()
+//// Once ready, call CustomTabsIntent.Builder.build() to create a CustomTabsIntent
+//                CustomTabsIntent customTabsIntent = builder.build();
+//// and launch the desired Url with CustomTabsIntent.launchUrl()
+//                customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
+//
+//            }
+//        });
 
         fbtn = view.findViewById(R.id.facebook_btn);
         fbtn.setOnClickListener(new View.OnClickListener() {
