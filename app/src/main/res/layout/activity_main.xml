@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.abhiraj.indianbrowsermadeinindia.MainActivity"
+    tools:context="com.abhiraj.browser.MainActivity"
     android:animateLayoutChanges="true"
     android:background="#b0000000"
     android:clipChildren="false"
@@ -20,12 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.abhiraj.indianbrowsermadeinindia.customview.verticalViewPager
+        <com.abhiraj.browser.customview.verticalViewPager
             android:clipChildren="false"
             android:id="@+id/main_view_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </com.abhiraj.indianbrowsermadeinindia.customview.verticalViewPager>
+        </com.abhiraj.browser.customview.verticalViewPager>
     </LinearLayout>
 
     <LinearLayout

@@ -155,7 +155,7 @@
                 android:background="@android:color/white"/>
         </LinearLayout>
     </LinearLayout>
-    <com.abhiraj.indianbrowsermadeinindia.custom.HandWrite
+    <com.abhiraj.browser.custom.HandWrite
         android:id="@+id/handWriteView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

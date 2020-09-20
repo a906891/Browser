@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.abhiraj.indianbrowsermadeinindia">
+    package="com.abhiraj.browser">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name=".MyApplicationNew"
+        android:name="com.abhiraj.browser.MyApplicationNew"
         android:allowBackup="true"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,42 +15,42 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.MainActivity">
+        <activity android:name="com.abhiraj.browser.MainActivity">
 
         </activity>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SplashScreen">
+        <activity android:name="com.abhiraj.browser.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.QrcodeActivity">
+        <activity android:name="com.abhiraj.browser.QrcodeActivity">
         </activity>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.file.FileActivity">
+        <activity android:name="com.abhiraj.browser.file.FileActivity">
 
         </activity>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.file.PageAttributesActivity"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.FavAndHisActivity"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.custom.PaintActivity"/>
+        <activity android:name="com.abhiraj.browser.file.PageAttributesActivity"/>
+        <activity android:name="com.abhiraj.browser.FavAndHisActivity"/>
+        <activity android:name="com.abhiraj.browser.custom.PaintActivity"/>
 
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.DownloaderNew"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Settings"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsDownload"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsChnagelanguage"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsAboutUs"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsNotification"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsBrowsing"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsClearRecord"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsAdBlocker"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.SettingsSearch"/>
+        <activity android:name="com.abhiraj.browser.DownloaderNew"/>
+        <activity android:name="com.abhiraj.browser.Settings"/>
+        <activity android:name="com.abhiraj.browser.SettingsDownload"/>
+        <activity android:name="com.abhiraj.browser.SettingsChnagelanguage"/>
+        <activity android:name="com.abhiraj.browser.SettingsAboutUs"/>
+        <activity android:name="com.abhiraj.browser.SettingsNotification"/>
+        <activity android:name="com.abhiraj.browser.SettingsBrowsing"/>
+        <activity android:name="com.abhiraj.browser.SettingsClearRecord"/>
+        <activity android:name="com.abhiraj.browser.SettingsAdBlocker"/>
+        <activity android:name="com.abhiraj.browser.SettingsSearch"/>
 
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Feedback"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Theme"/>
+        <activity android:name="com.abhiraj.browser.Feedback"/>
+        <activity android:name="com.abhiraj.browser.Theme"/>
 
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Incognito"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.Incognitooff"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.NighhtModeOff"/>
-        <activity android:name="com.abhiraj.indianbrowsermadeinindia.NightModeOn"/>
+        <activity android:name="com.abhiraj.browser.Incognito"/>
+        <activity android:name="com.abhiraj.browser.Incognitooff"/>
+        <activity android:name="com.abhiraj.browser.NighhtModeOff"/>
+        <activity android:name="com.abhiraj.browser.NightModeOn"/>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
